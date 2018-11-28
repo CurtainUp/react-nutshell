@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom'
+import Events from "./events/Events"
 
 class App extends Component {
   render() {
@@ -12,7 +13,7 @@ class App extends Component {
           return <div>Chat</div>
         }} />
         <Route exact path="/events" render={(props) => {
-          return <div>Events</div>
+          return <Events {...props}/>
         }} />
         <Route exact path="/todo" render={(props) => {
           return <div>To Do</div>
