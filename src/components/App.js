@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom'
 import Chat from './chat/Chat'
-import API from '../modules/API/API'
 
 class App extends Component {
 
