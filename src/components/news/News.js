@@ -30,7 +30,6 @@ export default class News extends React.Component {
       </Container>)
   }
 }
-
 class NewsModal extends React.Component {
   constructor(props) {
     super(props);
@@ -47,6 +46,13 @@ class NewsModal extends React.Component {
     });
   }
 
+  handleFieldChange = evt => {
+    const stateToChange = {}
+    stateToChange[evt.target.id] = evt.target.value
+    this.setState(stateToChange)
+    console.log(stateToChange)
+  }
+
   render() {
     return (
       <div className="text-center m-3">
@@ -57,15 +63,15 @@ class NewsModal extends React.Component {
             <Form>
               <FormGroup>
                 <Label for="articleTitle">Title</Label>
-                <Input type="text" name="title" id="articleTitle" placeholder="Title of article" />
+                <Input onChange={this.handleFieldChange} type="text" name="title" id="title" placeholder="Title of article" />
               </FormGroup>
               <FormGroup>
                 <Label for="articleURL">URL</Label>
-                <Input type="text" name="url" id="articleURL" placeholder="Link to article" />
+                <Input onChange={this.handleFieldChange} type="text" name="url" id="url" placeholder="Link to article" />
               </FormGroup>
               <FormGroup>
                 <Label for="articleSummary">Article Summary</Label>
-                <Input type="textarea" name="text" id="articleSummary" placeholder="A brief summary of the article" />
+                <Input onChange={this.handleFieldChange} type="textarea" name="text" id="summary" placeholder="A brief summary of the article" />
               </FormGroup>
             </Form>
           </ModalBody>

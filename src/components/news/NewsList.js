@@ -3,6 +3,7 @@ import { Col, Row, ListGroup, ListGroupItem, Badge, Button } from 'reactstrap'
 
 // Displays saved articles
 export default class NewsList extends React.Component {
+
   render() {
     return (
       <ListGroup>
@@ -11,7 +12,7 @@ export default class NewsList extends React.Component {
             <ListGroupItem key={article.id}>
               <Row>
                 <Col xs="3" className="d-flex align-items-center">
-                <Badge><i className="icon-book-open "></i></Badge></Col>
+                  <Badge><i className="icon-book-open "></i></Badge></Col>
                 <Col mx="auto"><a style={{ fontSize: 20 }} href={article.url}>{article.title}</a>
                   <p>{article.summary}</p>
                 </Col>
