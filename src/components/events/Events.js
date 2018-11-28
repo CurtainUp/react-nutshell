@@ -6,7 +6,10 @@ import EventList from "./EventList"
 export default class Events extends Component {
   state = {
     events: [],
-    modal: false
+    modal: false,
+    name: "",
+    date: "",
+    location: ""
   }
 
   componentDidMount() {
@@ -21,8 +24,18 @@ export default class Events extends Component {
     })
   }
 
+  addAndListEvents = (entryObject) => {
+    return API.saveData("events", entryObject).then(() => {
+      API.getData("events").then((allEvents) => {
+        this.setState({
+          events: allEvents
+        })
+      })
+    })
+  }
+
   deleteAndListEvents = (id) => {
-    API.deleteData("events", id)
+    return API.deleteData("events", id)
       .then(() => {
         API.getData("events").then((allEvents) => {
           this.setState({
@@ -33,7 +46,7 @@ export default class Events extends Component {
   }
 
   editAndList = (entryObject, id) => {
-    API.editData("events", entryObject, id)
+    return API.editData("events", entryObject, id)
     .then(() => {
       API.getData("events").then((allEvents) => {
         this.setState({
@@ -42,9 +55,20 @@ export default class Events extends Component {
       })
     })
   }
+  handleFieldChange = evt => {
+    const stateToChange = {}
+    stateToChange[evt.target.id] = evt.target.value
+    this.setState(stateToChange)
+  }
 
-
-
+  buildNewEvent = () => {
+    const event = {
+      name: this.state.name,
+      location: this.state.location,
+      date: this.state.date
+    }
+    this.addAndListEvents(event).then(()=> {this.toggle()})
+  }
 
   toggle = () => {
     this.setState({
@@ -63,21 +87,21 @@ export default class Events extends Component {
             <ModalBody>
               <Form>
                 <FormGroup>
-                  <Label for="eventName">Event Name</Label>
-                  <Input type="text" name="eventName" id="eventName" />
+                  <Label for="name">Event Name</Label>
+                  <Input type="text" name="eventName" id="name" onChange={this.handleFieldChange}/>
                 </FormGroup>
                 <FormGroup>
-                  <Label for="eventLocation">Location</Label>
-                  <Input type="text" name="eventLocation" id="eventLocation" />
+                  <Label for="location">Location</Label>
+                  <Input type="text" name="location" id="location" onChange={this.handleFieldChange}/>
                 </FormGroup>
                 <FormGroup>
                   <Label for="date">Date</Label>
-                  <Input type="date" name="date" id="date" />
+                  <Input type="date" name="date" id="date" onChange={this.handleFieldChange}/>
                 </FormGroup>
               </Form>
             </ModalBody>
             <ModalFooter>
-              <Button color="success" onClick={this.toggle}>Save</Button>{' '}
+              <Button color="success" onClick={this.buildNewEvent}>Save</Button>
               <Button color="secondary" onClick={this.toggle}>Cancel</Button>
             </ModalFooter>
           </Modal>
