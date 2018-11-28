@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { ListGroupItem, Badge } from 'reactstrap'
+import { ListGroupItem, Badge, Fade } from 'reactstrap'
 import moment from 'moment'
 import './message.scss'
 
@@ -7,7 +7,6 @@ class Message extends Component {
 
   getMessageUser = () => {
     let messageUser = this.props.users.find(user => user.id === this.props.message.userId)
-    console.log(messageUser)
     return messageUser.displayName
   }
 
@@ -27,11 +26,13 @@ class Message extends Component {
 
     return (
       <ListGroupItem className={groupClasses}>
-        <p className="message__info">
-          <span className="px-1 message__username">{this.getMessageUser()}</span>
-          <span className="px-1 message__time text-muted">{moment(message.timestamp).fromNow()}</span>
-        </p>
-        <Badge className={`px-3 py-2 message__body ${msgClasses}`} pill>{message.text}</Badge>
+        <Fade>
+          <p className="message__info">
+            <span className="px-1 message__username">{this.getMessageUser()}</span>
+            <span className="px-1 message__time text-muted">{moment(message.timestamp).fromNow()}</span>
+          </p>
+          <Badge className={`px-3 py-2 message__body ${msgClasses}`} pill>{message.text}</Badge>
+        </Fade>
       </ListGroupItem>
     )
   }
