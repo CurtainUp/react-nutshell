@@ -6,10 +6,11 @@ import API from '../../modules/API/API'
 class Chat extends Component {
   state = {
     messages: [],
-    userId: 1
+    users: []
   }
 
   componentDidMount() {
+    this.getUsers()
     this.getMessages()
   }
 
@@ -17,6 +18,12 @@ class Chat extends Component {
     return API.getData("messages")
     .then(messages => this.setState({messages: messages}))
   }
+
+  getUsers() {
+    return API.getData("users")
+      .then(users => this.setState({users: users}))
+  }
+
 
   render() {
     return (
@@ -28,7 +35,7 @@ class Chat extends Component {
         </Row>
         <Row>
           <Col>
-            <ChatMessages messages={this.state.messages} user={this.state.userId} />
+            <ChatMessages messages={this.state.messages} currentUser={this.props.currentUser} users={this.state.users} />
           </Col>
         </Row>
       </Container>

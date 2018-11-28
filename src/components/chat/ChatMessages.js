@@ -10,7 +10,10 @@ class ChatMessages extends Component {
       <ListGroup>
         {
           this.props.messages.map(message => {
-            return <Message key={message.id} user={this.props.user} message={message} />
+            return <Message key={message.id}
+              currentUser={this.props.currentUser}
+              users={this.props.users}
+              message={message} />
           })
         }
       </ListGroup>
