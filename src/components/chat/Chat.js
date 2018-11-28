@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container, Row, Col, Badge } from 'reactstrap'
+import { Container, Row, Col } from 'reactstrap'
 import ChatMessages from './ChatMessages'
 import API from '../../modules/API/API'
 
