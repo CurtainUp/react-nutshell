@@ -5,7 +5,6 @@ $font-family-base:Poppins;
 @import url(https://fonts.googleapis.com/css?family=Poppins:200,300,400,700);
 $headings-font-family:Poppins;
 
-$enable-grid-classes:false;
 $primary:#07689F;
 $secondary:#C9D6DF;
 $success:#11D3BC;
@@ -21,4 +20,4 @@ $btn-border-radius:1.35rem;
 
 // Add SASS theme customizations here..
 
-@import "../node_modules/bootstrap/scss/bootstrap.scss"
+@import "../node_modules/bootstrap/scss/bootstrap"
