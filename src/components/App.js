@@ -7,10 +7,10 @@ class App extends Component {
     return (
       <Switch>
         <Route exact path="/" render={(props) => {
-          return <Chat />
+          return <div>Home</div>
         }} />
         <Route exact path="/chat" render={(props) => {
-          return <div>Chat</div>
+          return <Chat />
         }} />
         <Route exact path="/events" render={(props) => {
           return <div>Events</div>
