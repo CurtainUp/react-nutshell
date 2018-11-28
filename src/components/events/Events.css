@@ -1,0 +1,12 @@
+.events {
+  max-width: 800px;
+}
+
+#firstEvent {
+  background-color: #d0fbf6;
+  color: black;
+}
+
+.list-group {
+  color: gray
+}

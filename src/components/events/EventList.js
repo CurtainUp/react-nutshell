@@ -8,7 +8,7 @@ export default class EventList extends Component {
       <ListGroup>
       {
         this.props.events.map(event =>
-          <EventItem key={event.id} event={event} />
+          <EventItem key={event.id} event={event} deleteAndListEvents={this.props.deleteAndListEvents} />
         )
       }
     </ListGroup>

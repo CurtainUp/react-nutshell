@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Button, Form, FormGroup, Label, Input, Container, Modal, ModalHeader, ModalBody, ModalFooter, ListGroup } from 'reactstrap';
 import API from "./../../modules/API/API"
 import EventList from "./EventList"
+import "./Events.css"
 
 export default class Events extends Component {
   state = {
@@ -16,12 +17,19 @@ export default class Events extends Component {
     this.getEvents()
   }
 
+  highlightFirst = () => {
+    const firstEvent = document.getElementsByClassName("list-group-item")[0]
+    firstEvent.setAttribute("id", "firstEvent")
+    firstEvent.firstElementChild.firstElementChild.nextElementSibling.setAttribute("style", "color:black")
+  }
+
   getEvents = () => {
-    return API.getData("events").then((allEvents) => {
+    const currentUser = 3
+    return API.getData(`events?userId=${currentUser}&_sort=date&_order=asc`).then((allEvents) => {
       this.setState({
         events: allEvents
       })
-    })
+    }).then(()=>{this.highlightFirst()})
   }
 
   addAndListEvents = (entryObject) => {
@@ -45,7 +53,7 @@ export default class Events extends Component {
       })
   }
 
-  editAndList = (entryObject, id) => {
+  editAndListEvents = (entryObject, id) => {
     return API.editData("events", entryObject, id)
     .then(() => {
       API.getData("events").then((allEvents) => {
@@ -78,7 +86,7 @@ export default class Events extends Component {
 
   render() {
     return (
-      <Container>
+      <Container className="events">
         <h1 className="text-center mt-5">Egg-citing Events!</h1>
         <div className="text-center mt-5">
           <Button className="text-light" color="success" onClick={this.toggle}>Add New Event</Button>
@@ -88,15 +96,15 @@ export default class Events extends Component {
               <Form>
                 <FormGroup>
                   <Label for="name">Event Name</Label>
-                  <Input type="text" name="eventName" id="name" onChange={this.handleFieldChange}/>
+                  <Input type="text" name="eventName" id="name" onChange={this.handleFieldChange} required/>
                 </FormGroup>
                 <FormGroup>
                   <Label for="location">Location</Label>
-                  <Input type="text" name="location" id="location" onChange={this.handleFieldChange}/>
+                  <Input type="text" name="location" id="location" onChange={this.handleFieldChange} required/>
                 </FormGroup>
                 <FormGroup>
                   <Label for="date">Date</Label>
-                  <Input type="date" name="date" id="date" onChange={this.handleFieldChange}/>
+                  <Input type="date" name="date" id="date" onChange={this.handleFieldChange} required/>
                 </FormGroup>
               </Form>
             </ModalBody>
@@ -107,7 +115,7 @@ export default class Events extends Component {
           </Modal>
         </div>
         <div className="mt-5">
-          <EventList events={this.state.events}/>
+          <EventList events={this.state.events} deleteAndListEvents={this.deleteAndListEvents}/>
         </div>
 
       </Container>
