@@ -23,13 +23,15 @@ export default class ToDoList extends Component {
       dueBy: this.state.dueBy
     }
     if (event.key === "Enter") {
-      this.props.editTask(id, taskObj)
-        .then(() => console.log(taskObj))
-      this.setState({
-        editKey: null
-      })
+      if (taskObj.name === "") {
+        this.setState({ editKey: null })
+      } else {
+        this.props.editTask(id, taskObj)
+        this.setState({
+          editKey: null
+        })
+      }
     }
-
   }
 
   handleFieldChange = (evt) => {
