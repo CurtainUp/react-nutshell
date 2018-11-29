@@ -22,7 +22,6 @@ export default class News extends React.Component {
   saveArticle = (articleInfo) => {
     API.saveData("news", articleInfo)
       .then(() => {
-      // Clears main container and pulls new news dashboard with additional article.
       return this.newsLog()
     })
   }
@@ -30,7 +29,6 @@ export default class News extends React.Component {
   editArticle = (articleInfo, id) => {
     API.editData("news", articleInfo, id)
       .then(() => {
-      // Clears main container and pulls new news dashboard with additional article.
       return this.newsLog()
     })
   }
