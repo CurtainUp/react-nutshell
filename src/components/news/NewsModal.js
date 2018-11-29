@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input } from 'reactstrap'
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Label, Input } from 'reactstrap'
 import moment from 'moment'
 
 export default class NewsModal extends React.Component {
@@ -44,30 +44,32 @@ export default class NewsModal extends React.Component {
       <div className="text-center m-3">
         <Button className="center" color="success" onClick={this.toggle}>Add Article</Button>
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-          <ModalHeader toggle={this.toggle}>Add Article</ModalHeader>
-          <ModalBody>
-            <Form>
+          <form onSubmit={(e) => {
+            e.preventDefault()
+            this.handleAdd()
+            this.toggle()
+          }}>
+            <ModalHeader toggle={this.toggle}>Add Article</ModalHeader>
+            <ModalBody>
               <FormGroup>
                 <Label for="articleTitle">Title</Label>
-                <Input onChange={this.handleFieldChange} type="text" name="title" id="title" placeholder="Title of article" />
+                <Input onChange={this.handleFieldChange} type="text" name="title" id="title" placeholder="Title of article" required />
               </FormGroup>
               <FormGroup>
                 <Label for="articleURL">URL</Label>
-                <Input onChange={this.handleFieldChange} type="text" name="url" id="url" placeholder="Link to article" />
+                <Input onChange={this.handleFieldChange} type="text" name="url" id="url" placeholder="Link to article" required />
               </FormGroup>
               <FormGroup>
                 <Label for="articleSummary">Article Summary</Label>
-                <Input onChange={this.handleFieldChange} type="textarea" name="text" id="summary" placeholder="A brief summary of the article" />
+                <Input onChange={this.handleFieldChange} type="textarea" name="text" id="summary" placeholder="A brief summary of the article" required />
               </FormGroup>
-            </Form>
-          </ModalBody>
-          <ModalFooter>
-            <Button color="primary" onClick={() => {
-              this.handleAdd()
-              this.toggle()
-            }}>Save</Button>{' '}
-            <Button color="secondary" onClick={this.toggle}>Cancel</Button>
-          </ModalFooter>
+            </ModalBody>
+            <ModalFooter>
+              <Button color="primary" onSubmit={() => {
+              }}>Save</Button>{' '}
+              <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+            </ModalFooter>
+          </form>
         </Modal>
       </div>
     );
