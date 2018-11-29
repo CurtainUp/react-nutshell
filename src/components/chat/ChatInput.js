@@ -25,6 +25,7 @@ class ChatInput extends Component {
     }
 
     this.props.sendMessage(msgObj)
+    e.target.reset()
 
   }
 
