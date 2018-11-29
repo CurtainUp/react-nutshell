@@ -20,7 +20,7 @@ export default class NewsList extends React.Component {
                   <p>{article.summary}</p>
                 </Col>
                 <Col xs="3" className="d-flex align-items-center">
-                  <NewsEditModal />
+                  <NewsEditModal article={article} editArticle={this.props.editArticle}/>
                   <Button onClick={() => this.props.handleDelete(article.id)} className="m-1" color="primary">
                     <i className="icon-trash"></i>
                   </Button>

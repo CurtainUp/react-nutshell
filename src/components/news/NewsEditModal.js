@@ -18,6 +18,23 @@ export default class NewsEditModal extends React.Component {
     });
   }
 
+  // OnClick functionality to edit saved articles
+  handleEdit = (id) => {
+    // ADD TIMESTAMP
+    let timeSaved = moment(new Date())
+    // ADD USER ID ON CLICK - Currently hard coded, needs to be userSession.getUser()
+    let userId = 2
+    let articleInfo = {
+      title: this.state.title,
+      summary: this.state.summary,
+      url: this.state.url,
+      userId: userId,
+      timestamp: timeSaved
+    }
+    console.log(articleInfo)
+    this.props.editArticle(articleInfo, id)
+  }
+
   handleFieldChange = evt => {
     const stateToChange = {}
     stateToChange[evt.target.id] = evt.target.value
@@ -40,21 +57,21 @@ export default class NewsEditModal extends React.Component {
             <Form>
               <FormGroup>
                 <Label for="articleTitle">Title</Label>
-                <Input onChange={this.handleFieldChange} type="text" name="title" id="title" placeholder="Title of article" />
+                <Input onChange={this.handleFieldChange} type="text" name="title" id="title" defaultValue={this.props.article.title} />
               </FormGroup>
               <FormGroup>
                 <Label for="articleURL">URL</Label>
-                <Input onChange={this.handleFieldChange} type="text" name="url" id="url" placeholder="Link to article" />
+                <Input onChange={this.handleFieldChange} type="text" name="url" id="url" defaultValue={this.props.article.url} />
               </FormGroup>
               <FormGroup>
                 <Label for="articleSummary">Article Summary</Label>
-                <Input onChange={this.handleFieldChange} type="textarea" name="text" id="summary" placeholder="A brief summary of the article" />
+                <Input onChange={this.handleFieldChange} type="textarea" name="text" id="summary" defaultValue={this.props.article.summary} />
               </FormGroup>
             </Form>
           </ModalBody>
           <ModalFooter>
             <Button color="primary" onClick={() => {
-              this.props.handleEdit(this.article.id)
+              this.handleEdit(this.props.article.id)
               this.toggle()
             }}>Save</Button>{' '}
             <Button color="secondary" onClick={this.toggle}>Cancel</Button>
