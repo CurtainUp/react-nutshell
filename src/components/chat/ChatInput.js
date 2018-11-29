@@ -33,7 +33,7 @@ class ChatInput extends Component {
     return (
       <Row>
         <Col>
-          <Form onSubmit={(e) => this.prepareMessage(e) }>
+          <Form className="mb-3" onSubmit={(e) => this.prepareMessage(e) }>
             <InputGroup className="mt-5">
               <Input placeholder="Send a Message" id="message" onChange={(e) => this.handleFieldChange(e)} />
               <InputGroupAddon addonType="append">
