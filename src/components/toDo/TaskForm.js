@@ -25,6 +25,7 @@ export default class TaskForm extends Component {
 
   postTask = () => {
     let taskObj = {
+      // TODO: user id from session storage
       userId: 1,
       status: 1,
       name: this.state.name,

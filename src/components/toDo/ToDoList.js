@@ -4,19 +4,18 @@ import './ToDo.css'
 
 export default class ToDoList extends Component {
 
-  constructor() {
+  constructor(){
     super()
     this.state = {
-      isEditable: false
+      editKey: null
     }
   }
 
-  toggle() {
+  editKey(key) {
     this.setState({
-      isEditable: !this.state.isEditable
+      editKey: key
     })
   }
-
 
   render() {
     return (
@@ -28,33 +27,34 @@ export default class ToDoList extends Component {
                 this.props.tasks.map((task) => {
                   return <ListGroupItem id={task.id} key={task.id}>
                     <Row>
-                      <Col xs="auto">
+                      <Col xs="auto" className="d-flex auto align-items-center">
                         <h4><Badge><i className="icon-list"></i></Badge></h4>
                       </Col>
                       {
-                        !this.state.isEditable ?
+                         this.state.editKey === task.id ?
 
-                        <Col xs="3">
-                          <ListGroupItemHeading>{task.name}</ListGroupItemHeading>
-                          <ListGroupItemText>{task.dueBy}</ListGroupItemText>
-                        </Col>
+                          <Col xs="3">
+                            <ListGroupItemHeading ref={(name) => { this.nameInput = name }}contenteditable="true">{task.name}</ListGroupItemHeading>
+                            <ListGroupItemText contenteditable="true">{task.dueBy}</ListGroupItemText>
+                          </Col>
 
-                        :
+                          :
 
-                        <Col xs="3">
-                          <ListGroupItemHeading contenteditable="true">{task.name}</ListGroupItemHeading>
-                          <ListGroupItemText contenteditable="true">{task.dueBy}</ListGroupItemText>
-                        </Col>
+                          <Col xs="3">
+                            <ListGroupItemHeading>{task.name}</ListGroupItemHeading>
+                            <ListGroupItemText>{task.dueBy}</ListGroupItemText>
+                          </Col>
 
                       }
-                      <Col xs="5">
+                      <Col xs="5" className="d-flex auto align-items-center">
                         <InputGroup size="sm">
                           <InputGroupAddon addonType="append">Completed</InputGroupAddon>
                           <Input onClick={() => this.props.toggleStatus(task.status, task.id)} type="checkbox" />
                         </InputGroup>
                       </Col>
-                      <Col xs="auto">
-                        <Button className="m-1" color="primary" onClick={()=> this.toggle()}><i className="icon-pencil "></i></Button>
+                      <Col xs="auto" className="d-flex auto align-items-center">
+                        <Button className="m-1" color="primary" onClick={() => {this.editKey(task.id)}}>
+                          <i className="icon-pencil "></i></Button>
                         <Button className="m-1" onClick={() => this.props.deleteTask(task.id)} color="primary"><i className="icon-trash " ></i></Button>
                       </Col>
                     </Row>
