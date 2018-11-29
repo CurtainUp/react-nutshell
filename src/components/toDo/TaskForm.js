@@ -35,37 +35,41 @@ export default class TaskForm extends Component {
       name: this.state.name,
       dueBy: this.state.dueBy
     }
-    if (taskObj.name === null )
     this.props.createTask(taskObj)
     this.toggle()
   }
+
 
   render() {
     return (
       <div>
         <Button color="primary" className="m-4" onClick={this.toggle}>Add Task</Button>
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-          <ModalHeader toggle={this.toggle}>Add a New Task</ModalHeader>
-          <ModalBody>
-            <FormGroup>
-              <Label for="taskname">Task Name</Label>
-              <Input required ref={this.nameInput} onChange={this.handleFieldChange} type="text" name="taskName" id="name" placeholder="Task Name" />
-            </FormGroup>
-            <FormGroup>
-              <Label for="exampleDate">Complete By</Label>
-              <Input required onChange={this.handleFieldChange} type="date" name="date" id="dueBy" placeholder="date placeholder" />
-            </FormGroup>
-          </ModalBody>
-          <ModalFooter>
-            <Button color="primary"
-              onClick={this.postTask}>
-              Save</Button>{' '}
-            <Button color="secondary" onClick={() => {
-              this.toggle()
-              this.refs.nameInput.checkValidity()
-            }
-            }>Cancel</Button>
-          </ModalFooter>
+          <form onSubmit={(e) => {
+            e.preventDefault()
+            this.postTask()
+          }}>
+            <ModalHeader toggle={this.toggle}>Add a New Task</ModalHeader>
+            <ModalBody>
+              <FormGroup>
+                <Label for="taskname">Task Name</Label>
+                <Input required ref={this.nameInput} onChange={this.handleFieldChange} type="text" name="taskName" id="name" placeholder="Task Name" />
+              </FormGroup>
+              <FormGroup>
+                <Label for="exampleDate">Complete By</Label>
+                <Input required onChange={this.handleFieldChange} type="date" name="date" id="dueBy" placeholder="date placeholder" />
+              </FormGroup>
+            </ModalBody>
+            <ModalFooter>
+              <Button color="primary"
+                onSubmit={() => {}}>
+                Save</Button>{' '}
+              <Button color="secondary" onClick={() => {
+                this.toggle()
+              }
+              }>Cancel</Button>
+            </ModalFooter>
+          </form>
         </Modal>
       </div>
     )
