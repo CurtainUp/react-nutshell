@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom'
+import ToDo from './toDo/ToDo'
 import Chat from './chat/Chat'
 import News from './news/News'
 
@@ -22,7 +23,7 @@ class App extends Component {
           return <div>Events</div>
         }} />
         <Route exact path="/todo" render={(props) => {
-          return <div>To Do</div>
+          return <ToDo/>
         }} />
         <Route exact path="/news" render={(props) => {
           return <News />
