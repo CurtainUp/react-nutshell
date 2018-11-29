@@ -13,15 +13,15 @@ export default class NewsList extends React.Component {
           this.props.news.map((article) =>
             <ListGroupItem key={article.id}>
               <Row>
-                <Col xs="3" className="d-flex align-items-center">
-                  <Badge><i className="icon-book-open "></i></Badge></Col>
+                <Col xs="1" className="d-flex align-items-center">
+                  <Badge><i className="icon-book-open m-1"></i></Badge></Col>
                 <Col mx="auto"><a style={{ fontSize: 20 }} href={article.url}>{article.title}</a>
                   <p>{moment(article.timestamp).format("MM-DD-YYYY")}</p>
                   <p>{article.summary}</p>
                 </Col>
                 <Col xs="3" className="d-flex align-items-center">
                   <NewsEditModal article={article} editArticle={this.props.editArticle}/>
-                  <Button onClick={() => this.props.handleDelete(article.id)} className="m-1" color="primary">
+                  <Button onClick={() => this.props.handleDelete(article.id)} className="m-1 px-2 py-1" color="primary">
                     <i className="icon-trash"></i>
                   </Button>
                 </Col>

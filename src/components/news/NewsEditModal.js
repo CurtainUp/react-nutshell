@@ -48,7 +48,7 @@ export default class NewsEditModal extends React.Component {
 
           this.toggle()
         }}
-          className="m-1" color="primary">
+          className="m-1 px-2 py-1" color="primary">
           <i className="icon-pencil"></i>
         </Button>
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
