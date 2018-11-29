@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { checkPropTypes } from 'prop-types';
 
 export default class TaskForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      modal: false
-    };
+      modal: false,
+      valid: null
+    }
+    this.nameInput = React.createRef();
 
     this.toggle = this.toggle.bind(this);
   }
@@ -23,6 +26,7 @@ export default class TaskForm extends Component {
     this.setState(stateToChange)
   }
 
+
   postTask = () => {
     let taskObj = {
       // TODO: user id from session storage
@@ -31,6 +35,7 @@ export default class TaskForm extends Component {
       name: this.state.name,
       dueBy: this.state.dueBy
     }
+    if (taskObj.name === null )
     this.props.createTask(taskObj)
     this.toggle()
   }
@@ -44,18 +49,22 @@ export default class TaskForm extends Component {
           <ModalBody>
             <FormGroup>
               <Label for="taskname">Task Name</Label>
-              <Input valid onChange={this.handleFieldChange} type="text" name="taskName" id="name" placeholder="Task Name" />
+              <Input required ref={this.nameInput} onChange={this.handleFieldChange} type="text" name="taskName" id="name" placeholder="Task Name" />
             </FormGroup>
             <FormGroup>
               <Label for="exampleDate">Complete By</Label>
-              <Input valid onChange={this.handleFieldChange} type="date" name="date" id="dueBy" placeholder="date placeholder" />
+              <Input required onChange={this.handleFieldChange} type="date" name="date" id="dueBy" placeholder="date placeholder" />
             </FormGroup>
           </ModalBody>
           <ModalFooter>
             <Button color="primary"
               onClick={this.postTask}>
               Save</Button>{' '}
-            <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+            <Button color="secondary" onClick={() => {
+              this.toggle()
+              this.refs.nameInput.checkValidity()
+            }
+            }>Cancel</Button>
           </ModalFooter>
         </Modal>
       </div>

@@ -43,6 +43,15 @@ export default class ToDo extends Component {
       .then(() => this.setState(newState))
   }
 
+  editTask = (id, taskObj) => {
+    let newState = {}
+    return api.editData("tasks", taskObj, id)
+      .then(() => api.getData("tasks"))
+      .then(tasks => newState.tasks = tasks)
+      .then(() => this.setState(newState))
+  }
+
+
   toggleStatus = (currentStatus, id) => {
     let newState = {}
     let completeObj = {}
@@ -73,7 +82,8 @@ export default class ToDo extends Component {
             <ToDoList
               deleteTask={this.deleteTask}
               tasks={this.state.tasks}
-              toggleStatus={this.toggleStatus} />
+              toggleStatus={this.toggleStatus}
+              editTask={this.editTask} />
           </Col>
         </Row>
       </Container>
