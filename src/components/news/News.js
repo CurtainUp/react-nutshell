@@ -17,6 +17,13 @@ export default class News extends React.Component {
       .then(() => this.setState(newState))
   }
 
+  handleDelete = (id) => {
+    API.deleteData("news", id)
+      .then(() => API.getData("news"))
+      .then((news) =>
+      this.setState({news: news}))
+  }
+
   componentDidMount() {
     this.newsLog()
   }
@@ -26,7 +33,7 @@ export default class News extends React.Component {
       <Container>
         <h1 className="text-center mt-5">News Around the 'Berg!</h1>
         <NewsModal />
-        <NewsList news={this.state.news} />
+        <NewsList news={this.state.news} handleDelete={this.handleDelete} />
       </Container>)
   }
 }

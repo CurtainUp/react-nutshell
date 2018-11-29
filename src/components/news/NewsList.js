@@ -1,19 +1,8 @@
 import React from 'react'
 import { Col, Row, ListGroup, ListGroupItem, Badge, Button } from 'reactstrap'
-import API from '../../modules/API/API';
 
 // Displays saved articles
 export default class NewsList extends React.Component {
-  constructor(props) {
-    super(props)
-
-    // This binding is necessary to make `this` work in the callback
-    this.handleClick = this.handleClick.bind(this);
-  }
-
-  handleClick(id) {
-    API.deleteData("news", id)
-  }
 
   render() {
     return (
@@ -31,7 +20,7 @@ export default class NewsList extends React.Component {
                   <Button className="m-1" color="primary">
                     <i className="icon-pencil"></i>
                   </Button>
-                  <Button onClick={() => this.handleClick(article.id)} className="m-1" color="primary">
+                  <Button onClick={() => this.props.handleDelete(article.id)} className="m-1" color="primary">
                     <i className="icon-trash"></i>
                   </Button>
                 </Col>
