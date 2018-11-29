@@ -46,7 +46,7 @@ class NewsModal extends React.Component {
     });
   }
 
-  handleFieldChange = evt => {
+    handleFieldChange = evt => {
     const stateToChange = {}
     stateToChange[evt.target.id] = evt.target.value
     this.setState(stateToChange)
