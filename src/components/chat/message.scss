@@ -3,7 +3,36 @@
   margin-bottom: 5px;
 }
 
+.message__username {
+  font-weight: bold;
+}
+
 .message__body {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: normal;
+}
+
+.message__edited {
+  font-size: 11px;
+  margin:5px;
+  opacity: 0.75;
+}
+
+.message__time {
+  opacity: 0.5;
+}
+
+.edit-btn {
+  opacity: 0;
+  transition: .25s ease-in-out opacity;
+  .current-user__msg:hover & {
+    opacity: 1;
+  }
+}
+
+.current-user__msg {
+  .message__info {
+    display: flex;
+    flex-direction: row-reverse;
+  }
 }

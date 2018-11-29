@@ -11,6 +11,7 @@ class ChatMessages extends Component {
         {
           this.props.messages.map(message => {
             return <Message key={message.id}
+              editMessage={this.props.editMessage}
               currentUser={this.props.currentUser}
               users={this.props.users}
               message={message} />

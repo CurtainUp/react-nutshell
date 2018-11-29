@@ -30,6 +30,10 @@ class Chat extends Component {
     .then(() => this.getMessages())
   }
 
+  editMessage = (editedMsg, msgId) => {
+    return API.editData("messages", editedMsg, msgId)
+    .then(() => this.getMessages())
+  }
 
   render() {
 
@@ -42,7 +46,7 @@ class Chat extends Component {
         </Row>
         <Row>
           <Col>
-            <ChatMessages messages={this.state.messages} currentUser={this.props.currentUser} users={this.state.users} />
+            <ChatMessages messages={this.state.messages} currentUser={this.props.currentUser} users={this.state.users} editMessage={this.editMessage} />
           </Col>
         </Row>
         <ChatInput sendMessage={this.sendMessage} currentUser={this.props.currentUser} />
