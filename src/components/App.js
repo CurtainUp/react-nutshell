@@ -1,21 +1,34 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import ToDo from './toDo/ToDo'
 import Chat from './chat/Chat'
 import News from './news/News'
+import Landing from './start/Landing'
 
 class App extends Component {
 
   state = {
-    currentUser: 1
+    currentUser: 1,
+    isAuthenticated: false
+  }
+
+  isAuthenticated = () => {
+    if (sessionStorage.getItem("currentUser") !== null) {
+      this.isAuthenticated = true
+    } this.isAuthenticated = false
   }
 
   render() {
     return (
       <Switch>
+
         <Route exact path="/" render={(props) => {
-          return <div>Home</div>
+          if (this.state.isAuthenticated) {
+            return <div>You're Logged In!</div>
+          }
+          return <Landing />
         }} />
+
         <Route exact path="/chat" render={(props) => {
           return <Chat currentUser={this.state.currentUser} />
         }} />
@@ -23,7 +36,7 @@ class App extends Component {
           return <div>Events</div>
         }} />
         <Route exact path="/todo" render={(props) => {
-          return <ToDo/>
+          return <ToDo />
         }} />
         <Route exact path="/news" render={(props) => {
           return <News />
