@@ -1,6 +1,7 @@
 import React from 'react'
 import { Col, Row, ListGroup, ListGroupItem, Badge, Button } from 'reactstrap'
 import moment from 'moment'
+import NewsEditModal from './NewsEditModal'
 
 // Displays saved articles
 export default class NewsList extends React.Component {
@@ -19,9 +20,7 @@ export default class NewsList extends React.Component {
                   <p>{article.summary}</p>
                 </Col>
                 <Col xs="3" className="d-flex align-items-center">
-                  <Button className="m-1" color="primary">
-                    <i className="icon-pencil"></i>
-                  </Button>
+                  <NewsEditModal />
                   <Button onClick={() => this.props.handleDelete(article.id)} className="m-1" color="primary">
                     <i className="icon-trash"></i>
                   </Button>

@@ -2,7 +2,7 @@ import React from 'react'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input } from 'reactstrap'
 import moment from 'moment'
 
-export default class NewsModal extends React.Component {
+export default class NewsEditModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -18,21 +18,6 @@ export default class NewsModal extends React.Component {
     });
   }
 
-  handleAdd = () => {
-    // ADD TIMESTAMP
-    let timeSaved = moment(new Date())
-    // ADD USER ID ON CLICK - Currently hard coded, needs to be userSession.getUser()
-    let userId = 2
-    let articleInfo = {
-      title: this.state.title,
-      summary: this.state.summary,
-      url: this.state.url,
-      userId: userId,
-      timestamp: timeSaved
-    }
-    this.props.saveArticle(articleInfo)
-  }
-
   handleFieldChange = evt => {
     const stateToChange = {}
     stateToChange[evt.target.id] = evt.target.value
@@ -42,9 +27,15 @@ export default class NewsModal extends React.Component {
   render() {
     return (
       <div className="text-center m-3">
-        <Button className="center" color="success" onClick={this.toggle}>Add Article</Button>
+        <Button onClick={() => {
+
+          this.toggle()
+        }}
+          className="m-1" color="primary">
+          <i className="icon-pencil"></i>
+        </Button>
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-          <ModalHeader toggle={this.toggle}>Add Article</ModalHeader>
+          <ModalHeader toggle={this.toggle}>Edit Article</ModalHeader>
           <ModalBody>
             <Form>
               <FormGroup>
@@ -63,7 +54,7 @@ export default class NewsModal extends React.Component {
           </ModalBody>
           <ModalFooter>
             <Button color="primary" onClick={() => {
-              this.handleAdd()
+              this.props.handleEdit(this.article.id)
               this.toggle()
             }}>Save</Button>{' '}
             <Button color="secondary" onClick={this.toggle}>Cancel</Button>
