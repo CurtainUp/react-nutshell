@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom'
 import ToDo from './toDo/ToDo'
+import Chat from './chat/Chat'
+import News from './news/News'
 
 class App extends Component {
+
+  state = {
+    currentUser: 1
+  }
+
   render() {
     return (
       <Switch>
@@ -10,7 +17,7 @@ class App extends Component {
           return <div>Home</div>
         }} />
         <Route exact path="/chat" render={(props) => {
-          return <div>Chat</div>
+          return <Chat currentUser={this.state.currentUser} />
         }} />
         <Route exact path="/events" render={(props) => {
           return <div>Events</div>
@@ -19,7 +26,7 @@ class App extends Component {
           return <ToDo/>
         }} />
         <Route exact path="/news" render={(props) => {
-          return <div>News</div>
+          return <News />
         }} />
       </Switch>
     )
