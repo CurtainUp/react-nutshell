@@ -44,7 +44,7 @@ export default class ToDoList extends Component {
     return (
       <Container>
         <Row>
-          <Col>
+          <Col sm="12" md={{ size: 8, offset: 2}}>
             <ListGroup>
               {
                 this.props.tasks.map((task) => {
@@ -94,9 +94,9 @@ export default class ToDoList extends Component {
                               }
                             </Col>
                             <Col xs="auto" className="d-flex auto align-items-center">
-                              <Button className="m-1" color="primary" onClick={() => { this.editKey(task.id) }}>
+                              <Button className="m-1 px-2 py-1" color="primary" onClick={() => { this.editKey(task.id) }}>
                                 <i className="icon-pencil "></i></Button>
-                              <Button className="m-1" onClick={() => this.props.deleteTask(task.id)} color="primary"><i className="icon-trash " ></i></Button>
+                              <Button className="m-1 px-2 py-1" onClick={() => this.props.deleteTask(task.id)} color="primary"><i className="icon-trash " ></i></Button>
                             </Col>
                           </React.Fragment>
                       }
