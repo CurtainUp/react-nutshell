@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom'
 import Chat from './chat/Chat'
+import News from './news/News'
 
 class App extends Component {
 
@@ -24,7 +25,7 @@ class App extends Component {
           return <div>To Do</div>
         }} />
         <Route exact path="/news" render={(props) => {
-          return <div>News</div>
+          return <News />
         }} />
       </Switch>
     )
