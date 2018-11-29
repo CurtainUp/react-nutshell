@@ -39,15 +39,15 @@ export default class TaskForm extends Component {
       <div>
         <Button color="primary" className="m-4" onClick={this.toggle}>Add Task</Button>
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-          <ModalHeader toggle={this.toggle}>New Task</ModalHeader>
+          <ModalHeader toggle={this.toggle}>Add a New Task</ModalHeader>
           <ModalBody>
             <FormGroup>
               <Label for="taskname">Task Name</Label>
-              <Input onChange={this.handleFieldChange} type="text" name="taskName" id="name" placeholder="Task Name" />
+              <Input valid onChange={this.handleFieldChange} type="text" name="taskName" id="name" placeholder="Task Name" />
             </FormGroup>
             <FormGroup>
               <Label for="exampleDate">Complete By</Label>
-              <Input onChange={this.handleFieldChange} type="date" name="date" id="dueBy" placeholder="date placeholder" />
+              <Input valid onChange={this.handleFieldChange} type="date" name="date" id="dueBy" placeholder="date placeholder" />
             </FormGroup>
           </ModalBody>
           <ModalFooter>
