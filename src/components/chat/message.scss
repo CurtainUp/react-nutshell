@@ -36,3 +36,8 @@
     flex-direction: row-reverse;
   }
 }
+
+.messages-box {
+  max-height: 60vh;
+  overflow-y: scroll;
+}

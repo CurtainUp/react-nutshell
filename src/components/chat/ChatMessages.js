@@ -4,10 +4,28 @@ import { ListGroup } from 'reactstrap'
 import Message from './Message'
 
 class ChatMessages extends Component {
+  //
+  messagesEnd = React.createRef()
+
+  componentDidMount() {
+    //Set scroll to bottom of message window
+    this.scrollToBottom()
+  }
+
+  componentDidUpdate() {
+    //Set scroll to bottom of message window
+    this.scrollToBottom()
+  }
+
+  scrollToBottom = () => {
+    this.messagesEnd.scrollIntoView(false, { behavior: "smooth"})
+  }
 
   render() {
+
+
     return (
-      <ListGroup>
+      <ListGroup className="messages-box border">
         {
           this.props.messages.map(message => {
             return <Message key={message.id}
@@ -17,6 +35,7 @@ class ChatMessages extends Component {
               message={message} />
           })
         }
+        <div ref={(el) => {this.messagesEnd = el}}></div>
       </ListGroup>
     )
   }
