@@ -93,10 +93,10 @@ export default class Events extends Component {
       })
     }
 
-  getId = (e) => {
+  getId = (id) => {
     return new Promise((resolve, reject)=> {
       this.setState({
-        buttonId: e.target.id
+        buttonId: id
       }, ()=> resolve());
     })
   }
@@ -117,7 +117,7 @@ export default class Events extends Component {
       <Container className="events">
         <h1 className="text-center mt-5">Egg-citing Events!</h1>
         <div className="text-light text-center mt-5" ><Button className="text-light" color="success" id="addEvent" onClick={(e) => {
-          this.getId(e).then(() => this.toggle())
+          this.getId("addEvent").then(() => this.toggle())
         }}>Add New Event</Button></div>
         <div className="text-center mt-5">
           <EventForm modal={this.state.modal} className={this.props.className} handleFieldChange={this.handleFieldChange} buildNewEvent={this.buildNewEvent} toggle={this.toggle} buttonId={this.state.buttonId} events={this.state.events} name={this.state.name} location={this.state.location} date={this.state.date} getId={this.getId} />
