@@ -26,7 +26,7 @@ export default class Landing extends Component {
           <hr className="my-2" />
           <Row>
             <LoginModal buttonLabel="Login" checkSuccess={this.checkSuccess} />
-            <RegisterModal buttonLabel="Register" />
+            <RegisterModal buttonLabel="Register" checkSuccess={this.checkSuccess} />
           </Row>
         </Jumbotron>
       </React.Fragment>
