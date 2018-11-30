@@ -20,26 +20,9 @@ export default class Events extends Component {
   }
 
   componentDidMount() {
-    this.getEvents().then(()=> {
-      this.setState({
-        firstEventId: this.state.events[0].id
-      })
-    })
+    this.getEvents()
 
   }
-
-  // highlightFirst = () => {
-  //   const allEvents = document.getElementsByClassName("list-group-item")
-  //   for (let i = 0; i < allEvents.length; i++) {
-  //     if (i === 0) {
-  //       allEvents[0].setAttribute("id", "firstEvent")
-  //       allEvents[0].firstElementChild.firstElementChild.nextElementSibling.setAttribute("style", "color:black")
-  //     } else if (allEvents[i].hasAttribute("id")) {
-  //       allEvents[i].removeAttribute("id")
-  //       allEvents[i].firstElementChild.firstElementChild.nextElementSibling.removeAttribute("style")
-  //     }
-  //   }
-  // }
 
 
   getEvents = () => {
@@ -47,6 +30,10 @@ export default class Events extends Component {
     return API.getData(`events?userId=${currentUser}&_sort=date&_order=asc`).then((allEvents) => {
       this.setState({
         events: allEvents
+      })
+    }).then(()=> {
+      this.setState({
+        firstEventId: this.state.events[0].id
       })
     })
   }

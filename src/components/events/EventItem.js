@@ -1,13 +1,7 @@
 import React from 'react';
 import { Row, Button, Col, ListGroupItem, ListGroupItemHeading, ListGroupItemText } from 'reactstrap';
-import EventForm from "./EventForm"
 
-// let activeItem = ""
-// if (this.props.firstEventId === this.props.event.id) {
-//   activeItem = "bg-info"
-// } else {
-//   activeItem = ""
-// }
+
 
 export default class EventItem extends React.Component {
 
