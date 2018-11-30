@@ -15,18 +15,25 @@ export default class Events extends Component {
     date: "",
     location: "",
     buttonId: "",
-    firstEventId: ""
+    firstEventId: "",
+
   }
 
-  componentDidMount() {
-    this.getEvents()
 
+  componentDidMount() {
+    this.props.findFriends(this.props.currentUser)
+    .then(()=>{this.getEvents()})
   }
 
 
   getEvents = () => {
-    const currentUser = 3
-    return API.getData(`events?userId=${this.props.currentUser}&_sort=date&_order=asc`).then((allEvents) => {
+    let queryString = ""
+    this.props.friendsArray.forEach((friend)=>{
+      queryString += `&userId=${friend.id}`
+    })
+    console.log(this.props.friendsArray)
+    console.log(queryString)
+    return API.getData(`events?userId=${this.props.currentUser}${queryString}&_sort=date&_order=asc`).then((allEvents) => {
       this.setState({
         events: allEvents
       })
