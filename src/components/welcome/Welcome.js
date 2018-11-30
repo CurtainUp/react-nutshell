@@ -25,6 +25,7 @@ export default class Welcome extends Component {
                 <Button size="lg" onClick={()=>this.props.history.push("/news")}className="m-1" color="primary">News</Button>
                 <Button size="lg" onClick={()=>this.props.history.push("/todo")}className="m-1" color="primary">To Do</Button>
                 <Button size="lg" onClick={()=>this.props.history.push("/events")}className="m-1" color="primary">Events</Button>
+                <Button size="lg" onClick={()=>this.props.history.push("/friends")}className="m-1" color="primary">Friends</Button>
               </p>
             </Container>
           </Jumbotron>
