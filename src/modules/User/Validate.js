@@ -7,10 +7,10 @@ import userSession from "./UserSession"
 
 const validate = {
   newUser(entryObject) {
-    API.getData(`users?email=${entryObject.email}`)
+    return API.getData(`users?email=${entryObject.email}`)
       .then((user) => {
         if (user.length === 0) {
-          API.saveData("users", entryObject)
+          return API.saveData("users", entryObject)
             .then((user) => {
               userSession.logInUser(user.id)
             })
