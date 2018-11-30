@@ -31,7 +31,6 @@ export default class NewsEditModal extends React.Component {
       userId: userId,
       timestamp: timeSaved
     }
-    console.log(articleInfo)
     this.props.editArticle(articleInfo, id)
   }
 

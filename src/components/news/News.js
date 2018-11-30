@@ -5,11 +5,11 @@ import NewsModal from './NewsModal'
 import API from './../../modules/API/API'
 import UserSession from '../../modules/User/UserSession';
 
-
 export default class News extends React.Component {
 
   state = {
-    news: []
+    news: [],
+    friendNews: []
   }
 
   // Fetches all articles from the database and adds them to state.
@@ -19,7 +19,6 @@ export default class News extends React.Component {
     API.getData(`news?userId=${userId}`)
       .then(news => newState.news = news)
       .then(() => this.setState(newState))
-      console.log(newState)
   }
 
   // Posts new article to database and adds them to state.
