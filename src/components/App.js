@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom'
 import api from '../modules/API/API'
+import { Route, Switch, Redirect } from 'react-router-dom'
 import Events from "./events/Events"
 import ToDo from './toDo/ToDo'
 import Chat from './chat/Chat'
 import News from './news/News'
+import Landing from './start/Landing'
 import Welcome from './welcome/Welcome'
 import Friends from './friends/Friend'
 
@@ -14,10 +15,10 @@ class App extends Component {
     currentUser: 1,
     friendsArray: [],
     allUsers: [],
-    relationships:[]
+    relationships: []
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.findFriends(this.state.currentUser)
   }
 
@@ -45,35 +46,67 @@ class App extends Component {
   findFriends = (currentUserId) => {
     return this.findRelationships(currentUserId)
       .then((rels) => {
-        let  friendsArray = []
+        let friendsArray = []
         rels.forEach((rel) => {
-         friendsArray.push(this.state.allUsers.find(user => user.id === rel.friendId))
+          friendsArray.push(this.state.allUsers.find(user => user.id === rel.friendId))
         })
-        this.setState({friendsArray:friendsArray})
+        this.setState({ friendsArray: friendsArray })
       })
   }
 
+  isAuthenticated = () => sessionStorage.getItem("id") !== null
 
   render() {
     return (
       <Switch>
+
         <Route exact path="/" render={(props) => {
-          return <Welcome {...props}/>
+          if (this.isAuthenticated()) {
+            return <Redirect to="/welcome" />
+          }
+          return <Redirect to="/login" />
         }} />
+
+        <Route exact path="/welcome" render={props => {
+          if (this.isAuthenticated()) {
+            return <Welcome {...props} />
+          }
+          return <Redirect to="/login" />
+        }} />
+
+        <Route exact path="/login" render={props => {
+          if (this.isAuthenticated()) {
+            return <Redirect to="/welcome" />
+          }
+          return <Landing />
+        }} />
+
         <Route exact path="/chat" render={(props) => {
-          return <Chat currentUser={this.state.currentUser} />
+          if (this.isAuthenticated()) {
+            return <Chat currentUser={this.state.currentUser} />
+          }
+          return <Redirect to="/login" />
         }} />
         <Route exact path="/events" render={(props) => {
-          return <Events {...props}/>
+          if (this.isAuthenticated()) {
+            return <Events {...props} />
+          }
+          return <Redirect to="/login" />
         }} />
         <Route exact path="/todo" render={(props) => {
-          return <ToDo/>
+          if (this.isAuthenticated()) {
+            return <ToDo currentUser={this.state.currentUser} />
+          }
+          return <Redirect to="/login" />
         }} />
         <Route exact path="/news" render={(props) => {
-          return <News />
+          if (this.isAuthenticated()) {
+            return <News currentUser={this.state.currentUser} />
+          }
+          return <Redirect to="/login" />
         }} />
         <Route exact path="/friends" render={(props) => {
-          return <Friends friendsArray={this.state.friendsArray}/>
+          return <Friends friendsArray={this.state.friendsArray} />
         }} />
       </Switch>
     )

@@ -8,6 +8,7 @@ import {
   NavLink
 } from 'reactstrap';
 import { Link } from 'react-router-dom'
+import userSession from '../../modules/User/UserSession'
 
 export default class NavBar extends React.Component {
   constructor(props) {
@@ -25,6 +26,10 @@ export default class NavBar extends React.Component {
     });
   }
 
+  logOutUser = () => {
+    userSession.logOutUser()
+    //this.props.history.push("/login")
+  }
   render() {
     return (
       <div>
@@ -48,7 +53,7 @@ export default class NavBar extends React.Component {
                 <NavLink tag={Link} to="/friends">Friends</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink onClick={() => { alert("you logged out not really though") }}>Logout</NavLink>
+                <NavLink onClick={() => { this.logOutUser() }} href="/login">Logout</NavLink>
               </NavItem>
             </Nav>
           </Collapse>
