@@ -4,12 +4,13 @@ import ToDo from './toDo/ToDo'
 import Chat from './chat/Chat'
 import News from './news/News'
 import Landing from './start/Landing'
+import Welcome from './welcome/Welcome'
 
 class App extends Component {
 
   state = {
     currentUser: 1,
-    isAuthenticated: false
+    isAuthenticated: true
   }
 
   isAuthenticated = () => {
@@ -24,7 +25,7 @@ class App extends Component {
 
         <Route exact path="/" render={(props) => {
           if (this.state.isAuthenticated) {
-            return <div>You're Logged In!</div>
+            return <Welcome {...props} />
           }
           return <Landing />
         }} />

@@ -62,7 +62,7 @@ export default class ToDoList extends Component {
                             </Col>
 
                             <Col xs="5">
-                              <Alert color="primary">
+                              <Alert color="secondary">
                                 Press Enter to Save Changes.
                                </Alert>
                             </Col>
