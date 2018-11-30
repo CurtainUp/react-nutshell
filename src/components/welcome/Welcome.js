@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { Jumbotron, Button, Container, Col } from 'reactstrap'
 
 export default class Welcome extends Component {
+
+
   render() {
     return (
       <React.Fragment>
