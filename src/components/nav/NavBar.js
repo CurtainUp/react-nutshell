@@ -52,9 +52,12 @@ export default class NavBar extends React.Component {
               <NavItem>
                 <NavLink tag={Link} to="/friends">Friends</NavLink>
               </NavItem>
-              <NavItem>
-                <NavLink onClick={() => { this.logOutUser() }} href="/login">Logout</NavLink>
-              </NavItem>
+              { userSession.getUser()
+                ? (<NavItem>
+                    <NavLink tag={Link} onClick={() => { this.logOutUser() }} to="/login">Logout</NavLink>
+                  </NavItem>)
+                : null
+              }
             </Nav>
           </Collapse>
         </Navbar>
