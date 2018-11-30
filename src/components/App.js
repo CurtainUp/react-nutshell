@@ -4,6 +4,7 @@ import ToDo from './toDo/ToDo'
 import Chat from './chat/Chat'
 import News from './news/News'
 import Welcome from './welcome/Welcome'
+import Friends from './friends/Friend'
 
 class App extends Component {
 
@@ -28,6 +29,9 @@ class App extends Component {
         }} />
         <Route exact path="/news" render={(props) => {
           return <News />
+        }} />
+        <Route exact path="/friends" render={(props) => {
+          return <Friends />
         }} />
       </Switch>
     )

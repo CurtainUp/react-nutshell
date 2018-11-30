@@ -43,6 +43,9 @@ export default class NavBar extends React.Component {
                 <NavLink tag={Link} to="/news">News</NavLink>
               </NavItem>
               <NavItem>
+                <NavLink tag={Link} to="/friends">Friends</NavLink>
+              </NavItem>
+              <NavItem>
                 <NavLink onClick={() => { alert("you logged out not really though") }}>Logout</NavLink>
               </NavItem>
             </Nav>
