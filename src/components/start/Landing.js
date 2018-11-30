@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Row, Col, Jumbotron } from 'reactstrap'
+import {  Row, Jumbotron } from 'reactstrap'
 import LoginModal from './LoginModal'
 import RegisterModal from './RegisterModal'
 import { Redirect } from 'react-router-dom'

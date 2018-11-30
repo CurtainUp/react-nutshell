@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { Route, Switch, Redirect } from 'react-router-dom'
+import Events from "./events/Events"
 import ToDo from './toDo/ToDo'
 import Chat from './chat/Chat'
 import News from './news/News'
 import Landing from './start/Landing'
 import Welcome from './welcome/Welcome'
-import userSession from '../modules/User/UserSession'
 
 class App extends Component {
 
@@ -48,7 +48,7 @@ class App extends Component {
         }} />
         <Route exact path="/events" render={(props) => {
           if (this.isAuthenticated()) {
-            return <div>Events</div>
+            return <Events {...props}/>
           }
           return <Redirect to="/login" />
         }} />
