@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Col, Input } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Col, Input } from 'reactstrap'
+// import validate from '../../modules/User/Validate'
 
 class RegisterModal extends Component {
   state = {
@@ -16,7 +16,7 @@ class RegisterModal extends Component {
   render() {
     return (
       <div>
-        <Button color="danger" onClick={this.toggle}>{this.props.buttonLabel}</Button>
+        <Button className="text-white m-3" color="danger" onClick={this.toggle}>{this.props.buttonLabel}</Button>
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}>Register a Waddle 2.0 Account</ModalHeader>
           <ModalBody>

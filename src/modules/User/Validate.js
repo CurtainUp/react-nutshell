@@ -2,8 +2,8 @@
   Author(s): Rachel
   Purpose: this module is responsible for validating the user login and register data before storing the session. It imports api.js for fetches.
 */
-import API from "./api"
-import userSession from "./sessionStorage"
+import API from "../API/API"
+import userSession from "./UserSession"
 
 const validate = {
   newUser(entryObject) {
@@ -20,7 +20,7 @@ const validate = {
       })
   },
   existingUser(entryObject) {
-    API.getData(`users?email=${entryObject.email}`)
+    return API.getData(`users?email=${entryObject.email}`)
       .then((user) => {
         if (user[0] && user[0].password === entryObject.password) {
           userSession.logInUser(user[0].id)
