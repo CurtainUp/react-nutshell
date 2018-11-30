@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Alert, Container, ListGroup, Row, Col, ListGroupItem, ListGroupItemHeading, ListGroupItemText, Button, InputGroup, InputGroupAddon, InputGroupText, Input, Badge } from 'reactstrap';
+import { Alert, Container, ListGroup, Row, Col, ListGroupItem, ListGroupItemHeading, ListGroupItemText, Button, InputGroup, InputGroupAddon, Input, Badge } from 'reactstrap';
 import './ToDo.css'
 
 export default class ToDoList extends Component {
