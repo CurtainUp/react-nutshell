@@ -19,6 +19,7 @@ export default class NavBar extends React.Component {
       isOpen: false
     };
   }
+
   toggle() {
     this.setState({
       isOpen: !this.state.isOpen
@@ -47,6 +48,9 @@ export default class NavBar extends React.Component {
               </NavItem>
               <NavItem>
                 <NavLink tag={Link} to="/news">News</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink tag={Link} to="/friends">Friends</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink onClick={() => { this.logOutUser() }} href="/login">Logout</NavLink>
