@@ -8,18 +8,21 @@ import News from './news/News'
 import Landing from './start/Landing'
 import Welcome from './welcome/Welcome'
 import Friends from './friends/Friend'
-
+import userSession from './../modules/User/UserSession'
 class App extends Component {
 
   state = {
-    currentUser: 1,
     friendsArray: [],
     allUsers: [],
     relationships: []
   }
 
   componentDidMount() {
-    this.findFriends(this.state.currentUser)
+    this.findFriends(userSession.getUser())
+  }
+
+  currentUserToState = (userId) => {
+    this.setState({currentUser: userId})
   }
 
   getUsers = () => {
@@ -44,6 +47,7 @@ class App extends Component {
   }
 
   findFriends = (currentUserId) => {
+    console.log("current user", currentUserId)
     return this.findRelationships(currentUserId)
       .then((rels) => {
         let friendsArray = []
@@ -78,12 +82,12 @@ class App extends Component {
           if (this.isAuthenticated()) {
             return <Redirect to="/welcome" />
           }
-          return <Landing />
+          return <Landing findFriends={this.findFriends} />
         }} />
 
         <Route exact path="/chat" render={(props) => {
           if (this.isAuthenticated()) {
-            return <Chat currentUser={this.state.currentUser} />
+            return <Chat currentUser={userSession.getUser()} />
           }
           return <Redirect to="/login" />
         }} />
@@ -95,13 +99,13 @@ class App extends Component {
         }} />
         <Route exact path="/todo" render={(props) => {
           if (this.isAuthenticated()) {
-            return <ToDo currentUser={this.state.currentUser} />
+            return <ToDo currentUser={userSession.getUser()} />
           }
           return <Redirect to="/login" />
         }} />
         <Route exact path="/news" render={(props) => {
           if (this.isAuthenticated()) {
-            return <News currentUser={this.state.currentUser} />
+            return <News currentUser={userSession.getUser()} />
           }
           return <Redirect to="/login" />
         }} />
