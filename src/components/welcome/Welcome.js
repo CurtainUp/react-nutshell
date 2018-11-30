@@ -11,11 +11,11 @@ export default class Welcome extends Component {
 
               {/* TODO:update display name */}
               <h1 className="display-4 container">Welcome to Waddle, [Display Name]</h1>
+              <Col xs="8">
               <p className="lead container">
-                <Col xs="8">
                 With Waddle you can save your favorite news articles, plan your next event, make a to do list, and say "hi!" to friends.
-                </Col>
               </p>
+              </Col>
               <hr className="my-2" />
               <p className="lead container">
                 Pick a place to get started:

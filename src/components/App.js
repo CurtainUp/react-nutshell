@@ -1,34 +1,68 @@
-import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom'
+import React, { Component } from 'react'
+import { Route, Switch, Redirect } from 'react-router-dom'
 import Events from "./events/Events"
 import ToDo from './toDo/ToDo'
 import Chat from './chat/Chat'
 import News from './news/News'
+import Landing from './start/Landing'
 import Welcome from './welcome/Welcome'
 
 class App extends Component {
 
   state = {
-    currentUser: 1
+    currentUser: 1,
   }
+
+  isAuthenticated = () => sessionStorage.getItem("id") !== null
 
   render() {
     return (
       <Switch>
+
         <Route exact path="/" render={(props) => {
-          return <Welcome {...props}/>
+          if (this.isAuthenticated()) {
+            return <Redirect to="/welcome" />
+          }
+          return <Redirect to="/login" />
         }} />
+
+        <Route exact path="/welcome" render={props => {
+          if (this.isAuthenticated()) {
+            return <Welcome {...props} />
+          }
+          return <Redirect to="/login" />
+        }} />
+
+        <Route exact path="/login" render={props => {
+          if (this.isAuthenticated()) {
+            return <Redirect to="/welcome" />
+          }
+          return <Landing />
+        }} />
+
         <Route exact path="/chat" render={(props) => {
-          return <Chat currentUser={this.state.currentUser} />
+          if (this.isAuthenticated()) {
+            return <Chat currentUser={this.state.currentUser} />
+          }
+          return <Redirect to="/login" />
         }} />
         <Route exact path="/events" render={(props) => {
-          return <Events {...props}/>
+          if (this.isAuthenticated()) {
+            return <Events {...props}/>
+          }
+          return <Redirect to="/login" />
         }} />
         <Route exact path="/todo" render={(props) => {
-          return <ToDo/>
+          if (this.isAuthenticated()) {
+            return <ToDo currentUser={this.state.currentUser} />
+          }
+          return <Redirect to="/login" />
         }} />
         <Route exact path="/news" render={(props) => {
-          return <News />
+          if (this.isAuthenticated()) {
+            return <News currentUser={this.state.currentUser} />
+          }
+          return <Redirect to="/login" />
         }} />
       </Switch>
     )
