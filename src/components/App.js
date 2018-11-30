@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom'
 import api from '../modules/API/API'
+import Events from "./events/Events"
 import ToDo from './toDo/ToDo'
 import Chat from './chat/Chat'
 import News from './news/News'
@@ -63,7 +64,7 @@ class App extends Component {
           return <Chat currentUser={this.state.currentUser} />
         }} />
         <Route exact path="/events" render={(props) => {
-          return <div>Events</div>
+          return <Events {...props}/>
         }} />
         <Route exact path="/todo" render={(props) => {
           return <ToDo/>

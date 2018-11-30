@@ -1,0 +1,21 @@
+.events {
+  max-width: 800px;
+}
+
+.otherItems {
+  background-color: #11D3BC;
+  color: black;
+}
+
+.firstItem {
+  background-color:#FAFAFA
+}
+
+.list-group {
+  color: black
+}
+
+.icon-event {
+  padding: .75em;
+
+}
