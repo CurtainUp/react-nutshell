@@ -150,5 +150,32 @@
       "timestamp": "2018-11-15T05:29:23.477Z",
       "id": 4
     }
+  ],
+  "relationships":[
+    {
+      "id": 1,
+      "userId": 1,
+      "friendId":2
+    },
+    {
+      "id": 1,
+      "userId": 1,
+      "friendId": 3
+    },
+    {
+      "id": 1,
+      "userId": 2,
+      "friendId": 1
+    },
+    {
+      "id": 1,
+      "userId":3,
+      "friendId":2
+    },
+    {
+      "id": 1,
+      "userId": 3,
+      "friendId": 1
+    }
   ]
 }
