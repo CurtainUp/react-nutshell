@@ -20,7 +20,7 @@ class App extends Component {
 
   componentDidMount() {
     this.findFriends(userSession.getUser())
-    this.findFollowers(userSession.getUser())
+
   }
 
   currentUserToState = (userId) => {
@@ -121,7 +121,7 @@ class App extends Component {
         }} />
         <Route exact path="/friends" render={(props) => {
           if (this.isAuthenticated()) {
-            return <Friends friendsArray={this.state.friendsArray} followersArray={this.state.followersArray} />
+            return <Friends currentUserId={userSession.getUser()}friendsArray={this.state.friendsArray} followersArray={this.state.followersArray} findFriends={this.findFriends} findFollowers={this.findFollowers}/>
           }
           return <Redirect to="/login" />
         }} />
