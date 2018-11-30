@@ -47,7 +47,6 @@ class App extends Component {
   }
 
   findFriends = (currentUserId) => {
-    console.log("current user", currentUserId)
     return this.findRelationships(currentUserId)
       .then((rels) => {
         let friendsArray = []
@@ -110,7 +109,10 @@ class App extends Component {
           return <Redirect to="/login" />
         }} />
         <Route exact path="/friends" render={(props) => {
-          return <Friends friendsArray={this.state.friendsArray} />
+          if (this.isAuthenticated()) {
+            return <Friends friendsArray={this.state.friendsArray} />
+          }
+          return <Redirect to="/login" />
         }} />
       </Switch>
     )
