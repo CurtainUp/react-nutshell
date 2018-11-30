@@ -2,17 +2,20 @@
   max-width: 800px;
 }
 
-#firstEvent {
-  background-color: #d0fbf6;
+.otherItems {
+  background-color: #11D3BC;
   color: black;
 }
 
+.firstItem {
+  background-color:#FAFAFA
+}
+
 .list-group {
-  color: gray
+  color: black
 }
 
 .icon-event {
-  background-color: #F67280;
   padding: .75em;
 
 }

@@ -15,25 +15,31 @@ export default class Events extends Component {
     date: "",
     location: "",
     userId: 3,
-    buttonId: ""
+    buttonId: "",
+    firstEventId: ""
   }
 
   componentDidMount() {
-    this.getEvents()
+    this.getEvents().then(()=> {
+      this.setState({
+        firstEventId: this.state.events[0].id
+      })
+    })
+
   }
 
-  highlightFirst = () => {
-    const allEvents = document.getElementsByClassName("list-group-item")
-    for (let i = 0; i < allEvents.length; i++) {
-      if (i === 0) {
-        allEvents[0].setAttribute("id", "firstEvent")
-        allEvents[0].firstElementChild.firstElementChild.nextElementSibling.setAttribute("style", "color:black")
-      } else if (allEvents[i].hasAttribute("id")) {
-        allEvents[i].removeAttribute("id")
-        allEvents[i].firstElementChild.firstElementChild.nextElementSibling.removeAttribute("style")
-      }
-    }
-  }
+  // highlightFirst = () => {
+  //   const allEvents = document.getElementsByClassName("list-group-item")
+  //   for (let i = 0; i < allEvents.length; i++) {
+  //     if (i === 0) {
+  //       allEvents[0].setAttribute("id", "firstEvent")
+  //       allEvents[0].firstElementChild.firstElementChild.nextElementSibling.setAttribute("style", "color:black")
+  //     } else if (allEvents[i].hasAttribute("id")) {
+  //       allEvents[i].removeAttribute("id")
+  //       allEvents[i].firstElementChild.firstElementChild.nextElementSibling.removeAttribute("style")
+  //     }
+  //   }
+  // }
 
 
   getEvents = () => {
@@ -42,7 +48,7 @@ export default class Events extends Component {
       this.setState({
         events: allEvents
       })
-    }).then(()=>{this.highlightFirst()})
+    })
   }
 
   addAndListEvents = (entryObject) => {
@@ -130,7 +136,7 @@ export default class Events extends Component {
           <EventForm modal={this.state.modal} className={this.props.className} handleFieldChange={this.handleFieldChange} buildNewEvent={this.buildNewEvent} toggle={this.toggle} buttonId={this.state.buttonId} events={this.state.events} name={this.state.name} location={this.state.location} date={this.state.date} getId={this.getId} />
         </div>
         <div className="mt-5">
-          <EventList events={this.state.events} deleteAndListEvents={this.deleteAndListEvents} className={this.props.className} handleFieldChange={this.handleFieldChange} buildNewEvent={this.buildNewEvent} toggle={this.toggle} editState={this.editState} getId={this.getId} />
+          <EventList events={this.state.events} deleteAndListEvents={this.deleteAndListEvents} className={this.props.className} handleFieldChange={this.handleFieldChange} buildNewEvent={this.buildNewEvent} toggle={this.toggle} editState={this.editState} getId={this.getId} firstEventId={this.state.firstEventId}/>
         </div>
 
       </Container>
