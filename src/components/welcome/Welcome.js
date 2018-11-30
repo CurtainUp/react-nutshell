@@ -8,6 +8,8 @@ export default class Welcome extends Component {
         <Container className="my-5">
           <Jumbotron fluid>
             <Container fluid>
+
+              {/* TODO:update display name */}
               <h1 className="display-4 container">Welcome to Waddle, [Display Name]</h1>
               <p className="lead container">
                 <Col xs="8">
