@@ -8,7 +8,7 @@ export default class Friend extends Component {
   render() {
     return (
       <React.Fragment>
-        <UserCard usersArray={this.props.friendsArray}/>
+        <UserCard friendsArray={this.props.friendsArray}/>
       </React.Fragment>
 
     )

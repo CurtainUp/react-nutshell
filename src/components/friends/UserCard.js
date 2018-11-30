@@ -51,7 +51,7 @@ export default class UserCard extends Component {
             <Container className="my-2">
               <CardGroup>
                 {
-                  this.props.usersArray.map(user => {
+                  this.props.friendsArray.map(user => {
                     return (
                       <Col key={user.id} xs="3">
                         <Card className="m-2">
