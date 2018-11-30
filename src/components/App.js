@@ -10,7 +10,7 @@ class App extends Component {
 
   state = {
     currentUser: 1,
-    isAuthenticated: true
+    isAuthenticated: false
   }
 
   isAuthenticated = () => {
