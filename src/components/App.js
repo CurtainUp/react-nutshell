@@ -92,7 +92,7 @@ class App extends Component {
         }} />
         <Route exact path="/events" render={(props) => {
           if (this.isAuthenticated()) {
-            return <Events {...props} />
+            return <Events {...props} currentUser={userSession.getUser()}/>
           }
           return <Redirect to="/login" />
         }} />

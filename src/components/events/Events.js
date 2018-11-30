@@ -14,7 +14,6 @@ export default class Events extends Component {
     name: "",
     date: "",
     location: "",
-    userId: 3,
     buttonId: "",
     firstEventId: ""
   }
@@ -27,14 +26,20 @@ export default class Events extends Component {
 
   getEvents = () => {
     const currentUser = 3
-    return API.getData(`events?userId=${currentUser}&_sort=date&_order=asc`).then((allEvents) => {
+    return API.getData(`events?userId=${this.props.currentUser}&_sort=date&_order=asc`).then((allEvents) => {
       this.setState({
         events: allEvents
       })
     }).then(()=> {
-      this.setState({
-        firstEventId: this.state.events[0].id
-      })
+      { (this.state.events.length > 0)
+        ? this.setState({
+          firstEventId: this.state.events[0].id
+        })
+        : this.setState({
+          firstEventId: ""
+        })
+      }
+
     })
   }
 
@@ -70,7 +75,7 @@ export default class Events extends Component {
       name: this.state.name,
       location: this.state.location,
       date: this.state.date,
-      userId: this.state.userId
+      userId: this.props.currentUser
     }
       if (this.state.buttonId === "addEvent") {
         this.addAndListEvents(event)
