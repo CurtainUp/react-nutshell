@@ -3,8 +3,6 @@ import { Route, Switch } from 'react-router-dom'
 import ToDo from './toDo/ToDo'
 import Chat from './chat/Chat'
 import News from './news/News'
-import LoginModal from './start/LoginModal'
-import RegisterModal from './start/RegisterModal'
 class App extends Component {
 
   state = {
@@ -15,10 +13,7 @@ class App extends Component {
     return (
       <Switch>
         <Route exact path="/" render={(props) => {
-          return <div>
-            <LoginModal buttonLabel="Login" />
-            <RegisterModal buttonLabel="Register" />
-          </div>
+          return <div>Landing</div>
         }} />
         <Route exact path="/chat" render={(props) => {
           return <Chat currentUser={this.state.currentUser} />
