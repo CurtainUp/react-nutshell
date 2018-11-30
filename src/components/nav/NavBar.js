@@ -18,11 +18,13 @@ export default class NavBar extends React.Component {
       isOpen: false
     };
   }
+
   toggle() {
     this.setState({
       isOpen: !this.state.isOpen
     });
   }
+
   render() {
     return (
       <div>

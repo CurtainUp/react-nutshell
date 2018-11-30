@@ -43,7 +43,7 @@ class App extends Component {
   }
 
   findFriends = (currentUserId) => {
-    this.findRelationships(currentUserId)
+    return this.findRelationships(currentUserId)
       .then((rels) => {
         let  friendsArray = []
         rels.forEach((rel) => {
