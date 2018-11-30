@@ -5,7 +5,7 @@ const userSession = {
   },
 
   getUser() {
-    return Number(sessionStorage.getItem("id"))
+    return parseInt(window.sessionStorage.getItem("id"))
   },
 
   logOutUser() {
