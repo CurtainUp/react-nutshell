@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom'
 import ToDo from './toDo/ToDo'
 import Chat from './chat/Chat'
 import News from './news/News'
+import Welcome from './welcome/Welcome'
 
 class App extends Component {
 
@@ -14,7 +15,7 @@ class App extends Component {
     return (
       <Switch>
         <Route exact path="/" render={(props) => {
-          return <div>Home</div>
+          return <Welcome {...props}/>
         }} />
         <Route exact path="/chat" render={(props) => {
           return <Chat currentUser={this.state.currentUser} />
