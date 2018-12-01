@@ -4,16 +4,16 @@ import { ListGroup } from 'reactstrap'
 import Message from './Message'
 
 class ChatMessages extends Component {
-  //
+  //Create a react reference to be able to set scroll position of ListGroup
   messagesEnd = React.createRef()
 
   componentDidMount() {
-    //Set scroll to bottom of message window
+    //Set scroll to bottom of message window when component mounts
     this.scrollToBottom()
   }
 
   componentDidUpdate() {
-    //Set scroll to bottom of message window
+    //Set scroll to bottom of message window when component updates
     this.scrollToBottom()
   }
 
@@ -32,6 +32,7 @@ class ChatMessages extends Component {
               editMessage={this.props.editMessage}
               currentUser={this.props.currentUser}
               users={this.props.users}
+              relationships={this.props.relationships}
               message={message} />
           })
         }
