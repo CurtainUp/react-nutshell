@@ -33,6 +33,8 @@ class ChatMessages extends Component {
               currentUser={this.props.currentUser}
               users={this.props.users}
               relationships={this.props.relationships}
+              removeRelationship = {this.props.removeRelationship}
+              addRelationship = {this.props.addRelationship}
               message={message} />
           })
         }

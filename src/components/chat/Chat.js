@@ -48,6 +48,19 @@ class Chat extends Component {
     .then(() => this.getMessages())
   }
 
+  addRelationship = (newFriend) => {
+    let object = {
+      userId: this.props.currentUser,
+      friendId: newFriend
+    }
+    return API.saveData("relationships", object)
+      .then(() => this.getRelationships())
+  }
+  removeRelationship = (id) => {
+    return API.deleteData("relationships", id)
+      .then(() => this.getRelationships())
+  }
+
   render() {
 
     return (
@@ -68,6 +81,8 @@ class Chat extends Component {
                 currentUser={this.props.currentUser}
                 users={this.state.users}
                 relationships={this.state.relationships}
+                removeRelationship = {this.removeRelationship}
+                addRelationship = {this.addRelationship}
                 editMessage={this.editMessage} />
             </Col>
           </Row>

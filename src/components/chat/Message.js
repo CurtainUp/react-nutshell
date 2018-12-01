@@ -74,6 +74,8 @@ class Message extends Component {
                 displayName={this.getMessageUser().displayName}
                 relationships={this.props.relationships}
                 currentUser={this.props.currentUser}
+                removeRelationship = {this.props.removeRelationship}
+                addRelationship = {this.props.addRelationship}
                 />
             : <span className="message__username">{this.getMessageUser().displayName}</span>
             }
