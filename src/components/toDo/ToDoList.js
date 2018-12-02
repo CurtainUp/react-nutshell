@@ -15,11 +15,12 @@ export default class ToDoList extends Component {
     }
   }
 
+
   toggle(tab) {
     if (this.state.activeTab !== tab) {
       this.setState({
         activeTab: tab
-      });
+      })
     }
   }
 
@@ -54,6 +55,9 @@ export default class ToDoList extends Component {
 
   render() {
     return (
+
+      // TAB NAVIGATION
+
       <Container>
         <Nav tabs>
           <NavItem>
@@ -69,13 +73,13 @@ export default class ToDoList extends Component {
               className={classnames({ active: this.state.activeTab === '2' })}
               onClick={() => { this.toggle('2'); }}
             >
-              Moar Tabs
+              Complete
             </NavLink>
           </NavItem>
         </Nav>
         <TabContent activeTab={this.state.activeTab}>
 
-        {/* FIRST TAB */}
+          {/* FIRST TAB */}
 
           <TabPane tabId="1">
             <Container className="my-5">
@@ -84,62 +88,59 @@ export default class ToDoList extends Component {
                   <ListGroup>
                     {
                       this.props.tasks.map((task) => {
-                        return <ListGroupItem id={task.id} key={task.id}>
-                          <Row>
-                            <Col xs="auto" className="d-flex auto align-items-center">
-                              <h4><Badge><i className="icon-list"></i></Badge></h4>
-                            </Col>
-                            {
-                              this.state.editKey === task.id ?
-                                <React.Fragment>
-                                  <Col xs="4" onKeyPress={(event) => { this.handleKeyPress(event, task.id) }}>
-                                    <input id="name" onChange={(evt) => this.handleFieldChange(evt)} autoFocus type="text" defaultValue={task.name}></input>
-                                    <input id="dueBy" onChange={(evt) => this.handleFieldChange(evt)} type="date" defaultValue={task.dueBy}></input>
-                                  </Col>
+                        if (task.status === 1) {
+                          return (
+                            <ListGroupItem id={task.id} key={task.id}>
+                              <Row>
+                                <Col xs="auto" className="d-flex auto align-items-center">
+                                  <h4><Badge><i className="icon-list"></i></Badge></h4>
+                                </Col>
+                                {
+                                  this.state.editKey === task.id ?
+                                    <React.Fragment>
+                                      <Col xs="4" onKeyPress={(event) => { this.handleKeyPress(event, task.id) }}>
+                                        <input id="name" onChange={(evt) => this.handleFieldChange(evt)} autoFocus type="text" defaultValue={task.name}></input>
+                                        <input id="dueBy" onChange={(evt) => this.handleFieldChange(evt)} type="date" defaultValue={task.dueBy}></input>
+                                      </Col>
 
-                                  <Col xs="5">
-                                    <Alert color="secondary">
-                                      Press Enter to Save Changes.
+                                      <Col xs="5">
+                                        <Alert color="secondary">
+                                          Press Enter to Save Changes.
                                  </Alert>
-                                  </Col>
-                                  <Col xs="auto" className="d-flex auto align-items-center justify-content-end">
-                                    <Button className="m-1" onClick={() => this.props.deleteTask(task.id)} color="primary"><i className="icon-trash " ></i></Button>
-                                  </Col>
-                                </React.Fragment>
+                                      </Col>
+                                      <Col xs="auto" className="d-flex auto align-items-center justify-content-end">
+                                        <Button className="m-1" onClick={() => this.props.deleteTask(task.id)} color="primary"><i className="icon-trash " ></i></Button>
+                                      </Col>
+                                    </React.Fragment>
 
-                                :
+                                    :
 
-                                <React.Fragment>
-                                  <Col xs="3">
-                                    <ListGroupItemHeading>{task.name}</ListGroupItemHeading>
-                                    <ListGroupItemText>{task.dueBy}</ListGroupItemText>
-                                  </Col>
+                                    <React.Fragment>
+                                      <Col xs="3">
+                                        <ListGroupItemHeading>{task.name}</ListGroupItemHeading>
+                                        <ListGroupItemText>{task.dueBy}</ListGroupItemText>
+                                      </Col>
 
-                                  <Col xs="5" className="d-flex auto align-items-center">
-                                    {
-                                      task.status === 1 ?
+                                      <Col xs="5" className="d-flex auto align-items-center">
                                         <InputGroup size="sm">
                                           <InputGroupAddon addonType="append">Completed</InputGroupAddon>
                                           <Input onClick={() => this.props.toggleStatus(task.status, task.id)} type="checkbox" />
                                         </InputGroup>
-                                        :
-                                        <InputGroup size="sm">
-                                          <InputGroupAddon addonType="append">Completed</InputGroupAddon>
-                                          <Input onClick={() => this.props.toggleStatus(task.status, task.id)} defaultChecked type="checkbox" />
-                                        </InputGroup>
-                                    }
-                                  </Col>
-                                  <Col xs="auto" className="d-flex auto align-items-center">
-                                    <Button className="m-1 px-2 py-1" color="primary" onClick={() => { this.editKey(task.id) }}>
-                                      <i className="icon-pencil "></i></Button>
-                                    <Button className="m-1 px-2 py-1" onClick={() => this.props.deleteTask(task.id)} color="primary"><i className="icon-trash " ></i></Button>
-                                  </Col>
-                                </React.Fragment>
-                            }
-                          </Row>
-                        </ListGroupItem>
+                                      </Col>
+                                      <Col xs="auto" className="d-flex auto align-items-center">
+                                        <Button className="m-1 px-2 py-1" color="primary" onClick={() => { this.editKey(task.id) }}>
+                                          <i className="icon-pencil "></i></Button>
+                                        <Button className="m-1 px-2 py-1" onClick={() => this.props.deleteTask(task.id)} color="primary"><i className="icon-trash " ></i></Button>
+                                      </Col>
+                                    </React.Fragment>
+                                }
+                              </Row>
+                            </ListGroupItem>
+                          )
+                        }
                       })
                     }
+
                   </ListGroup>
                 </Col>
               </Row>
@@ -156,60 +157,54 @@ export default class ToDoList extends Component {
                   <ListGroup>
                     {
                       this.props.tasks.map((task) => {
-                        return <ListGroupItem id={task.id} key={task.id}>
-                          <Row>
-                            <Col xs="auto" className="d-flex auto align-items-center">
-                              <h4><Badge><i className="icon-list"></i></Badge></h4>
-                            </Col>
-                            {
-                              this.state.editKey === task.id ?
-                                <React.Fragment>
-                                  <Col xs="4" onKeyPress={(event) => { this.handleKeyPress(event, task.id) }}>
-                                    <input id="name" onChange={(evt) => this.handleFieldChange(evt)} autoFocus type="text" defaultValue={task.name}></input>
-                                    <input id="dueBy" onChange={(evt) => this.handleFieldChange(evt)} type="date" defaultValue={task.dueBy}></input>
-                                  </Col>
+                        if (task.status === 2) {
+                          return <ListGroupItem id={task.id} key={task.id}>
+                            <Row>
+                              <Col xs="auto" className="d-flex auto align-items-center">
+                                <h4><Badge><i className="icon-list"></i></Badge></h4>
+                              </Col>
+                              {
+                                this.state.editKey === task.id ?
+                                  <React.Fragment>
+                                    <Col xs="4" onKeyPress={(event) => { this.handleKeyPress(event, task.id) }}>
+                                      <input id="name" onChange={(evt) => this.handleFieldChange(evt)} autoFocus type="text" defaultValue={task.name}></input>
+                                      <input id="dueBy" onChange={(evt) => this.handleFieldChange(evt)} type="date" defaultValue={task.dueBy}></input>
+                                    </Col>
 
-                                  <Col xs="5">
-                                    <Alert color="secondary">
-                                      Press Enter to Save Changes.
+                                    <Col xs="5">
+                                      <Alert color="secondary">
+                                        Press Enter to Save Changes.
                                  </Alert>
-                                  </Col>
-                                  <Col xs="auto" className="d-flex auto align-items-center justify-content-end">
-                                    <Button className="m-1" onClick={() => this.props.deleteTask(task.id)} color="primary"><i className="icon-trash " ></i></Button>
-                                  </Col>
-                                </React.Fragment>
+                                    </Col>
+                                    <Col xs="auto" className="d-flex auto align-items-center justify-content-end">
+                                      <Button className="m-1" onClick={() => this.props.deleteTask(task.id)} color="primary"><i className="icon-trash " ></i></Button>
+                                    </Col>
+                                  </React.Fragment>
 
-                                :
+                                  :
 
-                                <React.Fragment>
-                                  <Col xs="3">
-                                    <ListGroupItemHeading>{task.name}</ListGroupItemHeading>
-                                    <ListGroupItemText>{task.dueBy}</ListGroupItemText>
-                                  </Col>
+                                  <React.Fragment>
+                                    <Col xs="3">
+                                      <ListGroupItemHeading>{task.name}</ListGroupItemHeading>
+                                      <ListGroupItemText>{task.dueBy}</ListGroupItemText>
+                                    </Col>
 
-                                  <Col xs="5" className="d-flex auto align-items-center">
-                                    {
-                                      task.status === 1 ?
-                                        <InputGroup size="sm">
-                                          <InputGroupAddon addonType="append">Completed</InputGroupAddon>
-                                          <Input onClick={() => this.props.toggleStatus(task.status, task.id)} type="checkbox" />
-                                        </InputGroup>
-                                        :
-                                        <InputGroup size="sm">
-                                          <InputGroupAddon addonType="append">Completed</InputGroupAddon>
-                                          <Input onClick={() => this.props.toggleStatus(task.status, task.id)} defaultChecked type="checkbox" />
-                                        </InputGroup>
-                                    }
-                                  </Col>
-                                  <Col xs="auto" className="d-flex auto align-items-center">
-                                    <Button className="m-1 px-2 py-1" color="primary" onClick={() => { this.editKey(task.id) }}>
-                                      <i className="icon-pencil "></i></Button>
-                                    <Button className="m-1 px-2 py-1" onClick={() => this.props.deleteTask(task.id)} color="primary"><i className="icon-trash " ></i></Button>
-                                  </Col>
-                                </React.Fragment>
-                            }
-                          </Row>
-                        </ListGroupItem>
+                                    <Col xs="5" className="d-flex auto align-items-center">
+                                      <InputGroup size="sm">
+                                        <InputGroupAddon addonType="append">Completed</InputGroupAddon>
+                                        <Input onClick={() => this.props.toggleStatus(task.status, task.id)} defaultChecked type="checkbox" />
+                                      </InputGroup>
+                                    </Col>
+                                    <Col xs="auto" className="d-flex auto align-items-center">
+                                      <Button className="m-1 px-2 py-1" color="primary" onClick={() => { this.editKey(task.id) }}>
+                                        <i className="icon-pencil "></i></Button>
+                                      <Button className="m-1 px-2 py-1" onClick={() => this.props.deleteTask(task.id)} color="primary"><i className="icon-trash " ></i></Button>
+                                    </Col>
+                                  </React.Fragment>
+                              }
+                            </Row>
+                          </ListGroupItem>
+                        }
                       })
                     }
                   </ListGroup>
