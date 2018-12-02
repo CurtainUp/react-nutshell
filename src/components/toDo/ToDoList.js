@@ -135,8 +135,8 @@ export default class ToDoList extends Component {
                                       </Col>
                                       {
                                         moment(this.state.today) >= moment(task.dueBy) ?
-                                          <Col xs="2">
-                                            <Alert color="warning">
+                                          <Col xs="2" className="d-flex auto align-items-center">
+                                            <Alert className="my-0" color="warning">
                                               Past Due!
                                             </Alert>
                                           </Col>
@@ -214,8 +214,8 @@ export default class ToDoList extends Component {
                                     </Col>
                                     {
                                         moment(this.state.today) >= moment(task.dueBy) ?
-                                          <Col xs="2">
-                                            <Alert color="warning">
+                                          <Col xs="2" className="d-flex auto align-items-center">
+                                            <Alert color="warning" className="my-0">
                                               Past Due!
                                             </Alert>
                                           </Col>
