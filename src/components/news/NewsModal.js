@@ -15,7 +15,7 @@ export default class NewsModal extends React.Component {
   toggle() {
     this.setState({
       modal: !this.state.modal
-    });
+    })
   }
 
   handleAdd = () => {
