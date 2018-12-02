@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { NavLink, Nav, TabContent, TabPane, NavItem, Alert, Container, ListGroup, Row, Col, ListGroupItem, ListGroupItemHeading, ListGroupItemText, Button, InputGroup, InputGroupAddon, InputGroupText, Input, Badge } from 'reactstrap';
+import { NavLink, Nav, TabContent, TabPane, NavItem, Alert, Container, ListGroup, Row, Col, ListGroupItem, ListGroupItemHeading, ListGroupItemText, Button, InputGroup, InputGroupAddon, Input, Badge } from 'reactstrap';
 import './ToDo.css'
 import classnames from 'classnames';
 
