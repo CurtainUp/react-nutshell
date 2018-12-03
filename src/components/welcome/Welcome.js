@@ -5,14 +5,18 @@ import UserSession from '../../modules/User/UserSession'
 
 export default class Welcome extends Component {
   state = {
-    displayName: ""
+    displayName: "",
+    profilePic: ""
   }
 
   getDisplayName = () => {
     let userId = UserSession.getUser()
     API.getData(`users?id=${userId}`)
       .then((user) => {
-        return this.setState({displayName: user[0].displayName})
+        return this.setState({
+          displayName: user[0].displayName,
+          profilePic: user[0].profilePic
+        })
       })
   }
 
@@ -28,10 +32,10 @@ export default class Welcome extends Component {
           <Jumbotron fluid>
             <Container fluid>
 
-              {/* TODO:update display name */}
               <h1 className="display-4 container">Welcome to Waddle, {this.state.displayName}</h1>
               <Col xs="8">
-                <p className="lead container">
+                <p className="lead container flex">
+
                   With Waddle you can save your favorite news articles, plan your next event, make a to do list, and say "hi!" to friends.
               </p>
               </Col>
