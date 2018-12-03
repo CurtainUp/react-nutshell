@@ -21,6 +21,17 @@ export default class News extends React.Component {
       .then(() => this.setState(newState))
   }
 
+  friendNewsLog = () => {
+    console.log(this.props.friendsArray)
+    let newState = {}
+    this.props.friendsArray.map((friend) =>
+    API.getData(`news?userId=${friend.id}`)
+      .then(friendNews => newState.friendNews = friendNews)
+      .then(console.log(newState))
+      .then(() => this.setState(newState))
+      )
+  }
+
   // Posts new article to database and adds them to state.
   saveArticle = (articleInfo) => {
     API.saveData("news", articleInfo)
@@ -46,6 +57,7 @@ export default class News extends React.Component {
 
   componentDidMount() {
     this.newsLog()
+    this.friendNewsLog()
   }
 
   render() {
@@ -53,7 +65,7 @@ export default class News extends React.Component {
       <Container>
         <h1 className="text-center mt-5">News Around the 'Berg!</h1>
         <NewsModal saveArticle={this.saveArticle} />
-        <NewsList news={this.state.news} handleDelete={this.handleDelete} editArticle={this.editArticle} />
+        <NewsList news={this.state.news} friendNews={this.state.friendNews} handleDelete={this.handleDelete} editArticle={this.editArticle} />
       </Container>)
   }
 }
