@@ -106,7 +106,7 @@ export default class ToDoList extends Component {
                                     <React.Fragment>
                                       <Col xs="4" onKeyPress={(event) => { this.handleKeyPress(event, task.id) }}>
                                         <input id="name" onChange={(evt) => this.handleFieldChange(evt)} autoFocus type="text" defaultValue={task.name}></input>
-                                        <input id="dueBy" onChange={(evt) => this.handleFieldChange(evt)} type="date" defaultValue={moment(task.dueBy).format('l')}></input>
+                                        <input id="dueBy" onChange={(evt) => this.handleFieldChange(evt)} type="date" defaultValue={task.dueBy}></input>
                                       </Col>
 
                                       <Col xs="5">
@@ -203,7 +203,7 @@ export default class ToDoList extends Component {
                                   <React.Fragment>
                                     <Col xs="4">
                                       <ListGroupItemHeading>{task.name}</ListGroupItemHeading>
-                                      <ListGroupItemText>{task.dueBy}</ListGroupItemText>
+                                      <ListGroupItemText>{moment(task.dueBy).format('l')}</ListGroupItemText>
                                     </Col>
 
                                     <Col xs="3" className="d-flex auto align-items-center">
