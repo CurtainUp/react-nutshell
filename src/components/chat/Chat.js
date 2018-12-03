@@ -67,7 +67,7 @@ class Chat extends Component {
       <Container>
         <Row>
           <Col>
-            <h1 className="text-center my-5">Chat with your Waddle!</h1>
+            <h1 className="text-center my-5">Chat with the Waddle!</h1>
           </Col>
         </Row>
         {/* Make sure data is loaded */}
