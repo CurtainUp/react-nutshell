@@ -22,10 +22,6 @@ class App extends Component {
     this.findFriends(userSession.getUser())
   }
 
-  currentUserToState = (userId) => {
-    this.setState({ currentUser: userId })
-  }
-
   getUsers = () => {
     let newState = {}
     return api.getData("users")

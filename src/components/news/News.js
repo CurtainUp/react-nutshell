@@ -29,7 +29,7 @@ export default class News extends React.Component {
       return newsSearch += `&userId=${friend.id}`
     })
     return API.getData(`${newsSearch}&_sort=timestamp&_order=desc`)
-      .then((news) => this.setState({ friendNews: news }))
+    .then((news) => this.setState({ friendNews: news }))
   }
 
   // Posts new article to database and adds them to state.
@@ -56,15 +56,17 @@ export default class News extends React.Component {
   }
 
   componentDidMount() {
-    return this.props.findFriends(this.props.currentUserId)
-      .then(() => this.newsLog())
+    // return this.props.findFriends(this.props.currentUserId)
+      this.newsLog()
+      .then(() => this.friendNewsLog())
+
 
   }
 
   render() {
-    if (this.props.friendsArray.length > 0) {
-      this.friendNewsLog()
-    }
+    // if (this.props.friendsArray.length > 0) {
+    //   this.friendNewsLog()
+    // }
 
     return (
       <Container>
