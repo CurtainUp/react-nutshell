@@ -7,7 +7,8 @@ class RegisterModal extends Component {
     modal: false,
     email: "",
     password: "",
-    displayName: ""
+    displayName: "",
+    profilePic: ""
   }
 
   toggle = () => {
@@ -24,11 +25,23 @@ class RegisterModal extends Component {
 
   submitRegister = (e) => {
     e.preventDefault()
-    let obj = {
-      email: this.state.email,
-      password: this.state.password,
-      displayName: this.state.displayName
+    let obj
+    if (this.state.profilePic === "") {
+       obj = {
+        email: this.state.email,
+        password: this.state.password,
+        displayName: this.state.displayName,
+        profilePic:"https://images.prod.meredith.com/product/bf6939dbafb59f9155a451b61943f9a1/1518689128659/l/emperor-penguin-chick-portrait-antarctica-framed-photographic-print-on-canvas-size-24-h-x-16-w-x-1-5-d"
+        }
+    } else {
+       obj = {
+        email: this.state.email,
+        password: this.state.password,
+        displayName: this.state.displayName,
+        profilePic:this.state.profilePic
+      }
     }
+
     //validate and submit
     validate.newUser(obj)
     .then(() => this.props.checkSuccess())
@@ -60,6 +73,12 @@ class RegisterModal extends Component {
               <Label for="password" sm={2}>Password</Label>
               <Col sm={10}>
                 <Input type="password" name="password" id="password" placeholder="password" onChange={this.handleFieldChange} required />
+              </Col>
+            </FormGroup>
+            <FormGroup row>
+              <Label for="profilePic" sm={2}>Profile Picture URL</Label>
+              <Col sm={10}>
+                <Input type="profilePic" name="profilePic" id="profilePic" placeholder="URL" onChange={this.handleFieldChange} />
               </Col>
             </FormGroup>
           </ModalBody>
