@@ -17,6 +17,7 @@ export default class Friend extends Component {
           friendsArray={this.props.friendsArray}
           currentUserId={this.props.currentUserId}
           relationships={this.props.relationships}
+          addRelationship={this.props.addRelationship}
           removeRelationship={this.props.removeRelationship} />
       </React.Fragment>
 

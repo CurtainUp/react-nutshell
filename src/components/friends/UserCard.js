@@ -86,7 +86,7 @@ export default class UserCard extends Component {
                               {
                                 this.props.friendsArray.find(friend => friend.id === user.id)
                                 ? <p>You follow them!</p>
-                                : <Button onClick={this.props.addRelationship}>Follow</Button>
+                                : <Button onClick={() => this.props.addRelationship(user.id)}>Follow</Button>
                               }
                             </CardBody>
                           </Card>

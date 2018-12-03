@@ -57,10 +57,17 @@ class App extends Component {
       .then(() => {
         return this.findFriends(userSession.getUser())
       })
+  }
+
+  addRelationship = (newFriendId) => {
+    let currentUserId = userSession.getUser()
+    let object = {
+      userId: currentUserId,
+      friendId: newFriendId
     }
-
-  addRelationship = () => {
-
+    return api.saveData("relationships", object)
+      .then(() => this.findFriends(currentUserId))
+      .then(() => this.findFollowers(currentUserId))
   }
 
   findFriends = (currentUserId) => {
@@ -81,7 +88,6 @@ class App extends Component {
       })
       ).then((followers) => this.setState({followersArray: followers}))
   }
-
 
   isAuthenticated = () => sessionStorage.getItem("id") !== null
 
@@ -143,6 +149,7 @@ class App extends Component {
               relationships={this.state.relationships}
               findFriends={this.findFriends}
               findFollowers={this.findFollowers}
+              addRelationship={this.addRelationship}
               removeRelationship={this.removeRelationship} />
           }
           return <Redirect to="/login" />
