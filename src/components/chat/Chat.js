@@ -12,6 +12,10 @@ class Chat extends Component {
     isLoaded: false
   }
 
+  componentWillUnmount() {
+    this.props.clearState()
+  }
+
   componentDidMount() {
 
     //From App, pass down this.findFriends, this.findFollowers

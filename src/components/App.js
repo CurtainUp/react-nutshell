@@ -22,8 +22,12 @@ class App extends Component {
     this.findFriends(userSession.getUser())
   }
 
-  currentUserToState = (userId) => {
-    this.setState({ currentUser: userId })
+  clearState = () => {
+    this.setState({
+      followersArray: [],
+      friendsArray: [],
+      relationships: []
+    })
   }
 
   getUsers = () => {
@@ -118,7 +122,7 @@ class App extends Component {
 
         <Route exact path="/chat" render={(props) => {
           if (this.isAuthenticated()) {
-            return <Chat currentUser={userSession.getUser()} />
+            return <Chat currentUser={userSession.getUser()} clearState={this.clearState} />
           }
           return <Redirect to="/login" />
         }} />
