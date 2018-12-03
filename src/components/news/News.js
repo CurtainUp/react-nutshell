@@ -25,8 +25,8 @@ export default class News extends React.Component {
   friendNewsLog = () => {
     // Expand collects friend's user info and gives immediate access
     let newsSearch = `news?_expand=user`
-    this.props.friendsArray.map((friend, i) => {
-        return newsSearch += `&userId=${friend.id}`
+    this.props.friendsArray.map((friend) => {
+      return newsSearch += `&userId=${friend.id}`
     })
     return API.getData(newsSearch)
       .then((news) => this.setState({ friendNews: news }))
@@ -56,17 +56,21 @@ export default class News extends React.Component {
   }
 
   componentDidMount() {
-    this.props.findFriends(this.props.currentUserId)
+    return this.props.findFriends(this.props.currentUserId)
       .then(() => this.newsLog())
-      .then(() => this.friendNewsLog())
+
   }
 
   render() {
+    if (this.props.friendsArray.length > 0) {
+      this.friendNewsLog()
+    }
+
     return (
       <Container>
         <h1 className="text-center mt-5">News Around the 'Berg!</h1>
         <NewsModal saveArticle={this.saveArticle} />
-        <NewsList news={this.state.news} handleDelete={this.handleDelete} editArticle={this.editArticle} friendNews={this.state.friendNews} friendsArray={this.state.friendsArray} />
+        <NewsList news={this.state.news} handleDelete={this.handleDelete} editArticle={this.editArticle} friendNews={this.state.friendNews} friendsArray={this.props.friendsArray} />
       </Container>)
   }
 }
