@@ -246,7 +246,7 @@ Open your preferred browser and go to:
 `http://localhost:3000/`
 
 ##ERD
-![The Entity Relationship Diagram for Waddle 2.0](https://raw.githubusercontent.com/penguin-sweater/react-nutshell/Waddle_ERD.PNG)
+![The Entity Relationship Diagram for Waddle 2.0](https://github.com/penguin-sweater/react-nutshell/Waddle_ERD.PNG)
 
 # Enjoy Waddle, Have Fun, Stay Icy
 
