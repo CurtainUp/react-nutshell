@@ -25,12 +25,23 @@ class RegisterModal extends Component {
 
   submitRegister = (e) => {
     e.preventDefault()
-    let obj = {
-      email: this.state.email,
-      password: this.state.password,
-      displayName: this.state.displayName,
-      profilePic: this.state.profilePic
+    let obj
+    if (this.state.profilePic === "") {
+       obj = {
+        email: this.state.email,
+        password: this.state.password,
+        displayName: this.state.displayName,
+        profilePic:"https://images.prod.meredith.com/product/bf6939dbafb59f9155a451b61943f9a1/1518689128659/l/emperor-penguin-chick-portrait-antarctica-framed-photographic-print-on-canvas-size-24-h-x-16-w-x-1-5-d"
+        }
+    } else {
+       obj = {
+        email: this.state.email,
+        password: this.state.password,
+        displayName: this.state.displayName,
+        profilePic:this.state.profilePic
+      }
     }
+
     //validate and submit
     validate.newUser(obj)
     .then(() => this.props.checkSuccess())
