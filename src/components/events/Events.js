@@ -14,27 +14,38 @@ export default class Events extends Component {
     name: "",
     date: "",
     location: "",
-    userId: 3,
     buttonId: "",
-    firstEventId: ""
+    firstEventId: "",
+
   }
 
-  componentDidMount() {
-    this.getEvents()
 
+  componentDidMount() {
+    this.props.findFriends(this.props.currentUser)
+    .then(()=>{this.getEvents()})
   }
 
 
   getEvents = () => {
-    const currentUser = 3
-    return API.getData(`events?userId=${currentUser}&_sort=date&_order=asc`).then((allEvents) => {
+    let queryString = ""
+    this.props.friendsArray.forEach((friend)=>{
+      queryString += `&userId=${friend.id}`
+    })
+
+    return API.getData(`events?userId=${this.props.currentUser}${queryString}&_sort=date&_order=asc`).then((allEvents) => {
       this.setState({
         events: allEvents
       })
     }).then(()=> {
-      this.setState({
-        firstEventId: this.state.events[0].id
-      })
+       (this.state.events.length > 0)
+        ? this.setState({
+          firstEventId: this.state.events[0].id
+        })
+        : this.setState({
+          firstEventId: ""
+        })
+
+
     })
   }
 
@@ -70,7 +81,7 @@ export default class Events extends Component {
       name: this.state.name,
       location: this.state.location,
       date: this.state.date,
-      userId: this.state.userId
+      userId: this.props.currentUser
     }
       if (this.state.buttonId === "addEvent") {
         this.addAndListEvents(event)
@@ -123,7 +134,7 @@ export default class Events extends Component {
           <EventForm modal={this.state.modal} className={this.props.className} handleFieldChange={this.handleFieldChange} buildNewEvent={this.buildNewEvent} toggle={this.toggle} buttonId={this.state.buttonId} events={this.state.events} name={this.state.name} location={this.state.location} date={this.state.date} getId={this.getId} />
         </div>
         <div className="mt-5">
-          <EventList events={this.state.events} deleteAndListEvents={this.deleteAndListEvents} className={this.props.className} handleFieldChange={this.handleFieldChange} buildNewEvent={this.buildNewEvent} toggle={this.toggle} editState={this.editState} getId={this.getId} firstEventId={this.state.firstEventId}/>
+          <EventList events={this.state.events} deleteAndListEvents={this.deleteAndListEvents} className={this.props.className} handleFieldChange={this.handleFieldChange} buildNewEvent={this.buildNewEvent} toggle={this.toggle} editState={this.editState} getId={this.getId} firstEventId={this.state.firstEventId} friendsArray={this.props.friendsArray} />
         </div>
 
       </Container>
