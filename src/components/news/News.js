@@ -16,19 +16,31 @@ export default class News extends React.Component {
   newsLog = () => {
     let newState = {}
     let userId = UserSession.getUser()
-    API.getData(`news?userId=${userId}`)
+    return API.getData(`news?userId=${userId}`)
       .then(news => newState.news = news)
       .then(() => this.setState(newState))
   }
 
+  // Gathers articles saved by friends of current user.
   friendNewsLog = () => {
     console.log(this.props.friendsArray)
-    let newState = {}
+    // The following code creates an array of all friend's articles, but cannot set state.
+
+    // let friendArticles = []
+    // this.props.friendsArray.map((friend) =>
+    //   API.getData(`news?userId=${friend.id}`)
+    //     .then(article => friendArticles.push(article))
+    //     .then(console.log(friendArticles))
+    // )
+
+    // The following code can only return one article, state is being overwritten
+
+    let friendState = {}
     this.props.friendsArray.map((friend) =>
-    API.getData(`news?userId=${friend.id}`)
-      .then(friendNews => newState.friendNews = friendNews)
-      .then(console.log(newState))
-      .then(() => this.setState(newState))
+      API.getData(`news?userId=${friend.id}`)
+      .then(friendNews => friendState.friendNews = friendNews)
+      .then(console.log(friendState))
+      .then(() => this.setState(friendState))
       )
   }
 
@@ -65,7 +77,7 @@ export default class News extends React.Component {
       <Container>
         <h1 className="text-center mt-5">News Around the 'Berg!</h1>
         <NewsModal saveArticle={this.saveArticle} />
-        <NewsList news={this.state.news} friendNews={this.state.friendNews} handleDelete={this.handleDelete} editArticle={this.editArticle} />
+        <NewsList news={this.state.news} handleDelete={this.handleDelete} editArticle={this.editArticle}  friendNews={this.state.friendNews} />
       </Container>)
   }
 }

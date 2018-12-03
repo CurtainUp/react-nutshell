@@ -22,7 +22,7 @@ class App extends Component {
   }
 
   currentUserToState = (userId) => {
-    this.setState({currentUser: userId})
+    this.setState({ currentUser: userId })
   }
 
   getUsers = () => {
@@ -104,7 +104,9 @@ class App extends Component {
         }} />
         <Route exact path="/news" render={(props) => {
           if (this.isAuthenticated()) {
-            return <News currentUser={userSession.getUser()} friendsArray={this.state.friendsArray} />
+            return <News
+            currentUser={userSession.getUser()}
+            friendsArray={this.state.friendsArray} />
           }
           return <Redirect to="/login" />
         }} />
