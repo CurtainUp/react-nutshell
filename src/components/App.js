@@ -117,7 +117,8 @@ class App extends Component {
           if (this.isAuthenticated()) {
             return <News
             currentUser={userSession.getUser()}
-            friendsArray={this.state.friendsArray} />
+            friendsArray={this.state.friendsArray}
+            findFriends={this.findFriends} />
           }
           return <Redirect to="/login" />
         }} />

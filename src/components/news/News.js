@@ -23,25 +23,13 @@ export default class News extends React.Component {
 
   // Gathers articles saved by friends of current user.
   friendNewsLog = () => {
-    console.log(this.props.friendsArray)
-    // The following code creates an array of all friend's articles, but cannot set state.
-
-    // let friendArticles = []
-    // this.props.friendsArray.map((friend) =>
-    //   API.getData(`news?userId=${friend.id}`)
-    //     .then(article => friendArticles.push(article))
-    //     .then(console.log(friendArticles))
-    // )
-
-    // The following code can only return one article, state is being overwritten
-
-    let friendState = {}
-    this.props.friendsArray.map((friend) =>
-      API.getData(`news?userId=${friend.id}`)
-      .then(friendNews => friendState.friendNews = friendNews)
-      .then(console.log(friendState))
-      .then(() => this.setState(friendState))
-      )
+    // Expand collects friend's user info and gives immediate access
+    let newsSearch = `news?_expand=user`
+    this.props.friendsArray.map((friend, i) => {
+        return newsSearch += `&userId=${friend.id}`
+    })
+    return API.getData(newsSearch)
+      .then((news) => this.setState({ friendNews: news }))
   }
 
   // Posts new article to database and adds them to state.
@@ -68,8 +56,9 @@ export default class News extends React.Component {
   }
 
   componentDidMount() {
-    this.newsLog()
-    this.friendNewsLog()
+    this.props.findFriends(this.props.currentUserId)
+      .then(() => this.newsLog())
+      .then(() => this.friendNewsLog())
   }
 
   render() {
@@ -77,7 +66,7 @@ export default class News extends React.Component {
       <Container>
         <h1 className="text-center mt-5">News Around the 'Berg!</h1>
         <NewsModal saveArticle={this.saveArticle} />
-        <NewsList news={this.state.news} handleDelete={this.handleDelete} editArticle={this.editArticle}  friendNews={this.state.friendNews} />
+        <NewsList news={this.state.news} handleDelete={this.handleDelete} editArticle={this.editArticle} friendNews={this.state.friendNews} friendsArray={this.state.friendsArray} />
       </Container>)
   }
 }
