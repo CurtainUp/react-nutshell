@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Alert, Container, ListGroup, Row, Col, ListGroupItem, ListGroupItemHeading, ListGroupItemText, Button, InputGroup, InputGroupAddon, InputGroupText, Input, Badge } from 'reactstrap';
+import { Alert, Container, ListGroup, Row, Col, ListGroupItem, ListGroupItemHeading, ListGroupItemText, Button, InputGroup, InputGroupAddon, Input, Badge } from 'reactstrap';
 import './ToDo.css'
+import moment from 'moment'
 
 export default class ToDoList extends Component {
 
@@ -76,7 +77,7 @@ export default class ToDoList extends Component {
                           <React.Fragment>
                             <Col xs="3">
                               <ListGroupItemHeading>{task.name}</ListGroupItemHeading>
-                              <ListGroupItemText>{task.dueBy}</ListGroupItemText>
+                              <ListGroupItemText>{moment(task.dueBy).format('l')}</ListGroupItemText>
                             </Col>
 
                             <Col xs="5" className="d-flex auto align-items-center">

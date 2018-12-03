@@ -3,6 +3,8 @@ import { ListGroupItem, Button, Badge, Fade, Input, Form, InputGroup, InputGroup
 import moment from 'moment'
 import './message.scss'
 
+import UserPopover from './UserPopover'
+
 class Message extends Component {
 
   state = {
@@ -12,7 +14,7 @@ class Message extends Component {
 
   getMessageUser = () => {
     let messageUser = this.props.users.find(user => user.id === this.props.message.userId)
-    return messageUser.displayName
+    return messageUser
   }
 
   toggleEdit = () => {
@@ -65,7 +67,18 @@ class Message extends Component {
       <ListGroupItem className={groupClasses}>
         <Fade>
           <p className="message__info">
-            <span className="px-1 message__username">{this.getMessageUser()}</span>
+            { !isCurrentUser
+            ? <UserPopover
+                message={message}
+                messageUser={this.getMessageUser()}
+                displayName={this.getMessageUser().displayName}
+                relationships={this.props.relationships}
+                currentUser={this.props.currentUser}
+                removeRelationship = {this.props.removeRelationship}
+                addRelationship = {this.props.addRelationship}
+                />
+            : <span className="message__username">{this.getMessageUser().displayName}</span>
+            }
             <span className="px-1 message__time text-muted">{moment(message.timestamp).fromNow()}</span>
           </p>
 
@@ -78,13 +91,13 @@ class Message extends Component {
                     <Button color="success" className="text-white" type="submit">Edit</Button>
                   </InputGroupAddon>
                   <InputGroupAddon addonType="append">
-                    <Button id="cancel" className="text-white" onClick={(e) => this.saveEditedMessage(e)}>Cancel</Button>
+                    <Button id="cancel" className="text-white" onClick={e => this.saveEditedMessage(e)}>Cancel</Button>
                   </InputGroupAddon>
                 </InputGroup>
               </Form>
             : (<React.Fragment>
                 { isCurrentUser
-                  ? <span className="edit-btn btn btn-sm btn-success text-white mr-2" onClick={() => this.toggleEdit()}>Edit</span>
+                  ? <span className="edit-btn btn btn-sm btn-success text-white mr-2" onClick={this.toggleEdit}>Edit</span>
                   : null }
                 <Badge className={`px-3 py-2 message__body ${msgClasses}`} pill>{message.text}</Badge>
               </React.Fragment>)
