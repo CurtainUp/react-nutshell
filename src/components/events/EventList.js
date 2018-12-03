@@ -11,7 +11,15 @@ export default class EventList extends Component {
       <ListGroup>
       {
         this.props.events.map(event =>
-          <EventItem key={event.id} event={event} toggle={this.props.toggle} deleteAndListEvents={this.props.deleteAndListEvents} editState={this.props.editState}  getId={this.props.getId} firstEventId={this.props.firstEventId} friendsArray={this.props.friendsArray} />
+          <EventItem
+          key={event.id}
+          event={event}
+          toggle={this.props.toggle}
+          deleteAndListEvents={this.props.deleteAndListEvents}
+          editState={this.props.editState}
+          getId={this.props.getId}
+          firstEventId={this.props.firstEventId}
+          friendsArray={this.props.friendsArray} />
         )
       }
     </ListGroup>

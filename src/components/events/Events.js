@@ -4,7 +4,7 @@ import API from "./../../modules/API/API"
 import EventList from "./EventList"
 import EventForm from "./EventForm"
 import "./Events.css"
-
+import userSession from "../../modules/User/UserSession"
 
 
 export default class Events extends Component {
@@ -15,14 +15,18 @@ export default class Events extends Component {
     date: "",
     location: "",
     buttonId: "",
-    firstEventId: "",
+    firstEventId: ""
+
 
   }
 
 
   componentDidMount() {
-    this.props.findFriends(this.props.currentUser)
-    .then(()=>{this.getEvents()})
+    this.props.findFriends(userSession.getUser())
+    .then(()=>{
+        this.getEvents()
+
+    })
   }
 
 
@@ -32,7 +36,7 @@ export default class Events extends Component {
       queryString += `&userId=${friend.id}`
     })
 
-    return API.getData(`events?_expand=user&userId=${this.props.currentUser}${queryString}&_sort=date&_order=asc`).then((allEvents) => {
+    return API.getData(`events?_expand=user&userId=${userSession.getUser()}${queryString}&_sort=date&_order=asc`).then((allEvents) => {
       this.setState({
         events: allEvents
       })
@@ -81,7 +85,7 @@ export default class Events extends Component {
       name: this.state.name,
       location: this.state.location,
       date: this.state.date,
-      userId: this.props.currentUser
+      userId: userSession.getUser()
     }
       if (this.state.buttonId === "addEvent") {
         this.addAndListEvents(event)
@@ -131,10 +135,31 @@ export default class Events extends Component {
           this.getId("addEvent").then(() => this.toggle())
         }}>Add New Event</Button></div>
         <div className="text-center mt-5">
-          <EventForm modal={this.state.modal} className={this.props.className} handleFieldChange={this.handleFieldChange} buildNewEvent={this.buildNewEvent} toggle={this.toggle} buttonId={this.state.buttonId} events={this.state.events} name={this.state.name} location={this.state.location} date={this.state.date} getId={this.getId} />
+          <EventForm
+          modal={this.state.modal}
+          className={this.props.className}
+          handleFieldChange={this.handleFieldChange}
+          buildNewEvent={this.buildNewEvent}
+          toggle={this.toggle}
+          buttonId={this.state.buttonId}
+          events={this.state.events}
+          name={this.state.name}
+          location={this.state.location}
+          date={this.state.date}
+          getId={this.getId} />
         </div>
         <div className="mt-5">
-          <EventList events={this.state.events} deleteAndListEvents={this.deleteAndListEvents} className={this.props.className} handleFieldChange={this.handleFieldChange} buildNewEvent={this.buildNewEvent} toggle={this.toggle} editState={this.editState} getId={this.getId} firstEventId={this.state.firstEventId} friendsArray={this.props.friendsArray} />
+          <EventList
+          events={this.state.events}
+          deleteAndListEvents={this.deleteAndListEvents}
+          className={this.props.className}
+          handleFieldChange={this.handleFieldChange}
+          buildNewEvent={this.buildNewEvent}
+          toggle={this.toggle}
+          editState={this.editState}
+          getId={this.getId}
+          firstEventId={this.state.firstEventId}
+          friendsArray={this.props.friendsArray} />
         </div>
 
       </Container>
