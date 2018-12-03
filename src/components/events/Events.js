@@ -32,7 +32,7 @@ export default class Events extends Component {
       queryString += `&userId=${friend.id}`
     })
 
-    return API.getData(`events?userId=${this.props.currentUser}${queryString}&_sort=date&_order=asc`).then((allEvents) => {
+    return API.getData(`events?_expand=user&userId=${this.props.currentUser}${queryString}&_sort=date&_order=asc`).then((allEvents) => {
       this.setState({
         events: allEvents
       })

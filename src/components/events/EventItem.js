@@ -20,14 +20,16 @@ export default class EventItem extends React.Component {
             <Col xs={2} className="d-flex align-items-center">
               {<i className={(this.props.firstEventId === this.props.event.id) ? "icon-event rounded-circle firstItem text-dark" : "icon-event rounded-circle otherItems text-light"}></i>}
             </Col>
+
             <Col xs={7} >
               <ListGroupItemText >
                 {this.props.event.date}
                 {(this.props.event.userId !== currentUser)
                   ?
-                  <span className="badge badge-primary ml-2">
-                  {this.props.friendsArray.find((friend)=>friend.id === this.props.event.userId).displayName}
-                  </span>
+                    <span className="badge badge-primary ml-2">
+                    {this.props.friendsArray.find((friend)=>friend.id === this.props.event.userId).displayName}
+                    </span>
+
                   : ""
                 }
 
