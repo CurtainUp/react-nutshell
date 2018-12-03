@@ -205,27 +205,27 @@ Open <b>database.json</b> and copy the following into the file to create a datab
       "friendId": 2
     },
     {
-      "id": 1,
+      "id": 2,
       "userId": 1,
       "friendId": 3
     },
     {
-      "id": 1,
+      "id": 3,
       "userId": 2,
       "friendId": 1
     },
     {
-      "id": 1,
+      "id": 4,
       "userId": 2,
       "friendId": 3
     },
     {
-      "id": 1,
+      "id": 5,
       "userId": 3,
       "friendId": 2
     },
     {
-      "id": 1,
+      "id": 6,
       "userId": 3,
       "friendId": 1
     }
