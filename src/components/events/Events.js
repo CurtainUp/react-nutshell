@@ -31,21 +31,20 @@ export default class Events extends Component {
     this.props.friendsArray.forEach((friend)=>{
       queryString += `&userId=${friend.id}`
     })
-    console.log(this.props.friendsArray)
-    console.log(queryString)
+
     return API.getData(`events?userId=${this.props.currentUser}${queryString}&_sort=date&_order=asc`).then((allEvents) => {
       this.setState({
         events: allEvents
       })
     }).then(()=> {
-      { (this.state.events.length > 0)
+       (this.state.events.length > 0)
         ? this.setState({
           firstEventId: this.state.events[0].id
         })
         : this.setState({
           firstEventId: ""
         })
-      }
+
 
     })
   }
@@ -135,7 +134,7 @@ export default class Events extends Component {
           <EventForm modal={this.state.modal} className={this.props.className} handleFieldChange={this.handleFieldChange} buildNewEvent={this.buildNewEvent} toggle={this.toggle} buttonId={this.state.buttonId} events={this.state.events} name={this.state.name} location={this.state.location} date={this.state.date} getId={this.getId} />
         </div>
         <div className="mt-5">
-          <EventList events={this.state.events} deleteAndListEvents={this.deleteAndListEvents} className={this.props.className} handleFieldChange={this.handleFieldChange} buildNewEvent={this.buildNewEvent} toggle={this.toggle} editState={this.editState} getId={this.getId} firstEventId={this.state.firstEventId}/>
+          <EventList events={this.state.events} deleteAndListEvents={this.deleteAndListEvents} className={this.props.className} handleFieldChange={this.handleFieldChange} buildNewEvent={this.buildNewEvent} toggle={this.toggle} editState={this.editState} getId={this.getId} firstEventId={this.state.firstEventId} friendsArray={this.props.friendsArray} />
         </div>
 
       </Container>
