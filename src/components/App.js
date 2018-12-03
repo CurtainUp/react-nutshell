@@ -12,6 +12,7 @@ import userSession from './../modules/User/UserSession'
 class App extends Component {
 
   state = {
+    followersArray: [],
     friendsArray: [],
     allUsers: [],
     relationships: []
@@ -19,10 +20,11 @@ class App extends Component {
 
   componentDidMount() {
     this.findFriends(userSession.getUser())
+
   }
 
   currentUserToState = (userId) => {
-    this.setState({currentUser: userId})
+    this.setState({ currentUser: userId })
   }
 
   getUsers = () => {
@@ -56,6 +58,15 @@ class App extends Component {
         this.setState({ friendsArray: friendsArray })
       })
   }
+
+  findFollowers = (currentUserId) => {
+    return api.getData(`relationships?friendId=${currentUserId}`)
+      .then((followers) => followers.map((follower) => {
+        return this.state.allUsers.find(user => user.id === follower.userId)
+      })
+      ).then((followers) => this.setState({followersArray: followers}))
+  }
+
 
   isAuthenticated = () => sessionStorage.getItem("id") !== null
 
@@ -110,7 +121,7 @@ class App extends Component {
         }} />
         <Route exact path="/friends" render={(props) => {
           if (this.isAuthenticated()) {
-            return <Friends friendsArray={this.state.friendsArray} />
+            return <Friends currentUserId={userSession.getUser()}friendsArray={this.state.friendsArray} followersArray={this.state.followersArray} findFriends={this.findFriends} findFollowers={this.findFollowers}/>
           }
           return <Redirect to="/login" />
         }} />

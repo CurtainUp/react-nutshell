@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Row, Col, Button } from 'reactstrap';
+import { Container, Row, Col } from 'reactstrap';
 import api from './../../modules/API/API'
 import ToDoList from './ToDoList'
 import TaskForm from './TaskForm'
