@@ -12,7 +12,12 @@ export default class Friend extends Component {
   render() {
     return (
       <React.Fragment>
-        <UserCard followersArray={this.props.followersArray} friendsArray={this.props.friendsArray}/>
+        <UserCard
+          followersArray={this.props.followersArray}
+          friendsArray={this.props.friendsArray}
+          currentUserId={this.props.currentUserId}
+          relationships={this.props.relationships}
+          removeRelationship={this.props.removeRelationship} />
       </React.Fragment>
 
     )

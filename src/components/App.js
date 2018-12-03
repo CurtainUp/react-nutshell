@@ -20,7 +20,6 @@ class App extends Component {
 
   componentDidMount() {
     this.findFriends(userSession.getUser())
-
   }
 
   currentUserToState = (userId) => {
@@ -46,6 +45,22 @@ class App extends Component {
       .then(() => {
         return this.state.relationships.filter((relationship) => relationship.userId === currentUserId)
       })
+  }
+  removeRelationship = (id) => {
+    return api.deleteData("relationships", id)
+      .then(() => new Promise((resolve) => {
+        this.setState({
+          friendsArray: [],
+          relationships: []
+        }, () => resolve())
+      }))
+      .then(() => {
+        return this.findFriends(userSession.getUser())
+      })
+    }
+
+  addRelationship = () => {
+
   }
 
   findFriends = (currentUserId) => {
@@ -121,7 +136,14 @@ class App extends Component {
         }} />
         <Route exact path="/friends" render={(props) => {
           if (this.isAuthenticated()) {
-            return <Friends currentUserId={userSession.getUser()}friendsArray={this.state.friendsArray} followersArray={this.state.followersArray} findFriends={this.findFriends} findFollowers={this.findFollowers}/>
+            return <Friends
+              currentUserId={userSession.getUser()}
+              friendsArray={this.state.friendsArray}
+              followersArray={this.state.followersArray}
+              relationships={this.state.relationships}
+              findFriends={this.findFriends}
+              findFollowers={this.findFollowers}
+              removeRelationship={this.removeRelationship} />
           }
           return <Redirect to="/login" />
         }} />

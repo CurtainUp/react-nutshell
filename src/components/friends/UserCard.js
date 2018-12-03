@@ -23,9 +23,8 @@ export default class UserCard extends Component {
     }
   }
 
-
-
   render() {
+
     return (
       <React.Fragment>
         <Container className="my-3">
@@ -51,15 +50,18 @@ export default class UserCard extends Component {
             <TabPane tabId="1">
               <Container className="my-2">
                 <CardGroup>
-                  {
-                    this.props.friendsArray.map(user => {
+                  { this.props.friendsArray.map(user => {
+
+                      let relationshipId = this.props.relationships.find(relationship => relationship.userId === this.props.currentUserId && relationship.friendId === user.id).id
+
                       return (
                         <Col key={user.id} xs="3">
                           <Card className="m-2">
                             <CardImg top src="https://images.prod.meredith.com/product/bf6939dbafb59f9155a451b61943f9a1/1518689128659/l/emperor-penguin-chick-portrait-antarctica-framed-photographic-print-on-canvas-size-24-h-x-16-w-x-1-5-d" alt="Card image cap" />
                             <CardBody>
                               <CardTitle>{user.displayName}</CardTitle>
-                              <Button>Button</Button>
+                              {/* Unfollow your friends */}
+                              <Button onClick={() => this.props.removeRelationship(relationshipId)}>Unfollow</Button>
                             </CardBody>
                           </Card>
                         </Col>
@@ -80,7 +82,12 @@ export default class UserCard extends Component {
                             <CardImg top src="https://images.prod.meredith.com/product/bf6939dbafb59f9155a451b61943f9a1/1518689128659/l/emperor-penguin-chick-portrait-antarctica-framed-photographic-print-on-canvas-size-24-h-x-16-w-x-1-5-d" alt="Card image cap" />
                             <CardBody>
                               <CardTitle>{user.displayName}</CardTitle>
-                              <Button>Button</Button>
+                              {/* If you don't follow this user, give option to follow */}
+                              {
+                                this.props.friendsArray.find(friend => friend.id === user.id)
+                                ? <p>You follow them!</p>
+                                : <Button onClick={this.props.addRelationship}>Follow</Button>
+                              }
                             </CardBody>
                           </Card>
                         </Col>
