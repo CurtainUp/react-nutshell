@@ -40,7 +40,7 @@ export default class NewsList extends React.Component {
                 <Col xs="1" className="d-flex align-items-center">
                   <Badge><i className="icon-book-open m-1"></i></Badge></Col>
                 <Col mx="auto"><a style={{ fontSize: 20 }} href={article.url}>{article.title}</a>
-                  <p>{moment(article.timestamp).format("MM-DD-YYYY")}</p>
+                  <p>{moment(article.timestamp).format("MM-DD-YYYY")}<Badge color="danger" className="m-2">Friend</Badge></p>
                   <p>{article.summary}</p>
                 </Col>
                 <Col xs="3" className="d-flex align-items-center">
