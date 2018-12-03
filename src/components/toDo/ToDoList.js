@@ -164,6 +164,8 @@ export default class ToDoList extends Component {
                               </Row>
                             </ListGroupItem>
                           )
+                        } else {
+                          return null
                         }
                       })
                     }
@@ -235,6 +237,8 @@ export default class ToDoList extends Component {
                               }
                             </Row>
                           </ListGroupItem>
+                        } else {
+                          return null
                         }
                       })
                     }
