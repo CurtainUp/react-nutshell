@@ -41,3 +41,11 @@
   max-height: 55vh;
   overflow-y: scroll;
 }
+
+.popover-link {
+  cursor: pointer;
+  transition: opacity 0.125s ease-in-out;
+  &:hover {
+    opacity: 0.5;
+  }
+}
