@@ -29,8 +29,7 @@ export default class TaskForm extends Component {
 
   postTask = () => {
     let taskObj = {
-      // TODO: user id from session storage
-      userId: 1,
+      userId: this.props.currentUser,
       status: 1,
       name: this.state.name,
       dueBy: this.state.dueBy
