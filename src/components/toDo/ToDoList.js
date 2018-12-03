@@ -68,19 +68,29 @@ export default class ToDoList extends Component {
         <Nav tabs>
           <NavItem>
             <NavLink
-              style={{ backgroundColor: 'rgb(0,105,155, .1)' }}
               className={classnames({ active: this.state.activeTab === '1' })}
               onClick={() => { this.toggle('1'); }}
+              style={
+                (this.state.activeTab === '1') ?
+                {backgroundColor: 'rgb(0,105,155, .1)' }
+                :
+                null
+              }
             >
               To Do
             </NavLink>
           </NavItem>
           <NavItem>
             <NavLink
-              style={{ backgroundColor: 'rgb(250,113,129, .1)' }}
-              className={classnames({ active: this.state.activeTab === '2' }, "text-primary")}
+              className={classnames({ active: this.state.activeTab === '2' })}
               onClick={() => { this.toggle('2'); }}
-            >
+              style={
+                (this.state.activeTab === '2') ?
+                {backgroundColor: 'rgb(0,105,155, .1)' }
+                :
+                null
+              }
+              >
               Complete
             </NavLink>
           </NavItem>
@@ -98,7 +108,7 @@ export default class ToDoList extends Component {
                       this.props.tasks.map((task) => {
                         if (task.status === 1) {
                           return (
-                            <ListGroupItem style={{ backgroundColor: 'rgb(0,105,155, .1)' }} id={task.id} key={task.id}>
+                            <ListGroupItem id={task.id} key={task.id}>
                               <Row>
                                 <Col xs="auto" className="d-flex auto align-items-center">
                                   <h4><Badge><i className="icon-list"></i></Badge></h4>
@@ -177,7 +187,7 @@ export default class ToDoList extends Component {
                     {
                       this.props.tasks.map((task) => {
                         if (task.status === 2) {
-                          return <ListGroupItem style={{ backgroundColor: 'rgb(250,113,129, .1)' }} id={task.id} key={task.id}>
+                          return <ListGroupItem id={task.id} key={task.id}>
                             <Row>
                               <Col xs="auto" className="d-flex auto align-items-center">
                                 <h4><Badge><i className="icon-list"></i></Badge></h4>
