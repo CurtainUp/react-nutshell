@@ -16,7 +16,7 @@ export default class News extends React.Component {
   newsLog = () => {
     let newState = {}
     let userId = UserSession.getUser()
-    return API.getData(`news?userId=${userId}`)
+    return API.getData(`news?userId=${userId}&_sort=timestamp&_order=desc`)
       .then(news => newState.news = news)
       .then(() => this.setState(newState))
   }
@@ -28,7 +28,7 @@ export default class News extends React.Component {
     this.props.friendsArray.map((friend) => {
       return newsSearch += `&userId=${friend.id}`
     })
-    return API.getData(newsSearch)
+    return API.getData(`${newsSearch}&_sort=timestamp&_order=desc`)
       .then((news) => this.setState({ friendNews: news }))
   }
 
