@@ -1,6 +1,7 @@
 
 import React, { Component } from 'react'
 import UserCard from './UserCard'
+import "./Friends.css"
 
 export default class Friend extends Component {
   componentDidMount(){

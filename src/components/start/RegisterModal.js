@@ -7,7 +7,8 @@ class RegisterModal extends Component {
     modal: false,
     email: "",
     password: "",
-    displayName: ""
+    displayName: "",
+    profilePic: ""
   }
 
   toggle = () => {
@@ -27,7 +28,8 @@ class RegisterModal extends Component {
     let obj = {
       email: this.state.email,
       password: this.state.password,
-      displayName: this.state.displayName
+      displayName: this.state.displayName,
+      profilePic: this.state.profilePic
     }
     //validate and submit
     validate.newUser(obj)
@@ -60,6 +62,12 @@ class RegisterModal extends Component {
               <Label for="password" sm={2}>Password</Label>
               <Col sm={10}>
                 <Input type="password" name="password" id="password" placeholder="password" onChange={this.handleFieldChange} required />
+              </Col>
+            </FormGroup>
+            <FormGroup row>
+              <Label for="profilePic" sm={2}>Profile Picture URL</Label>
+              <Col sm={10}>
+                <Input type="profilePic" name="profilePic" id="profilePic" placeholder="URL" onChange={this.handleFieldChange} />
               </Col>
             </FormGroup>
           </ModalBody>

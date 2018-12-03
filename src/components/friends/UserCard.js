@@ -56,7 +56,7 @@ export default class UserCard extends Component {
                       return (
                         <Col key={user.id} xs="3">
                           <Card className="m-2">
-                            <CardImg top src="https://images.prod.meredith.com/product/bf6939dbafb59f9155a451b61943f9a1/1518689128659/l/emperor-penguin-chick-portrait-antarctica-framed-photographic-print-on-canvas-size-24-h-x-16-w-x-1-5-d" alt="Card image cap" />
+                            <CardImg top src={user.profilePic} alt="Card image cap" />
                             <CardBody>
                               <CardTitle>{user.displayName}</CardTitle>
                               <Button>Button</Button>
