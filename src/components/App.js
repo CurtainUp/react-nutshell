@@ -20,7 +20,6 @@ class App extends Component {
 
   componentDidMount() {
     this.findFriends(userSession.getUser())
-
   }
 
   currentUserToState = (userId) => {
@@ -47,6 +46,29 @@ class App extends Component {
         return this.state.relationships.filter((relationship) => relationship.userId === currentUserId)
       })
   }
+  removeRelationship = (id) => {
+    return api.deleteData("relationships", id)
+      .then(() => new Promise((resolve) => {
+        this.setState({
+          friendsArray: [],
+          relationships: []
+        }, () => resolve())
+      }))
+      .then(() => {
+        return this.findFriends(userSession.getUser())
+      })
+  }
+
+  addRelationship = (newFriendId) => {
+    let currentUserId = userSession.getUser()
+    let object = {
+      userId: currentUserId,
+      friendId: newFriendId
+    }
+    return api.saveData("relationships", object)
+      .then(() => this.findFriends(currentUserId))
+      .then(() => this.findFollowers(currentUserId))
+  }
 
   findFriends = (currentUserId) => {
     return this.findRelationships(currentUserId)
@@ -66,7 +88,6 @@ class App extends Component {
       })
       ).then((followers) => this.setState({followersArray: followers}))
   }
-
 
   isAuthenticated = () => sessionStorage.getItem("id") !== null
 
@@ -121,7 +142,15 @@ class App extends Component {
         }} />
         <Route exact path="/friends" render={(props) => {
           if (this.isAuthenticated()) {
-            return <Friends currentUserId={userSession.getUser()}friendsArray={this.state.friendsArray} followersArray={this.state.followersArray} findFriends={this.findFriends} findFollowers={this.findFollowers}/>
+            return <Friends
+              currentUserId={userSession.getUser()}
+              friendsArray={this.state.friendsArray}
+              followersArray={this.state.followersArray}
+              relationships={this.state.relationships}
+              findFriends={this.findFriends}
+              findFollowers={this.findFollowers}
+              addRelationship={this.addRelationship}
+              removeRelationship={this.removeRelationship} />
           }
           return <Redirect to="/login" />
         }} />

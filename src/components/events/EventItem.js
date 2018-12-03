@@ -27,7 +27,7 @@ export default class EventItem extends React.Component {
                 {(this.props.event.userId !== currentUser)
                   ?
                     <span className="badge badge-primary ml-2">
-                    {this.props.friendsArray.find((friend)=>friend.id === this.props.event.userId).displayName}
+                    {this.props.event.user.displayName}
                     </span>
 
                   : ""
