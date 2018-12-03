@@ -68,29 +68,27 @@ export default class ToDoList extends Component {
         <Nav tabs>
           <NavItem>
             <NavLink
-              className={classnames({ active: this.state.activeTab === '1' })}
+              className={classnames({ active: this.state.activeTab === '1' },
+                this.state.activeTab === '1' ?
+                  "text-primary"
+                  :
+                  "text-muted"
+              )}
               onClick={() => { this.toggle('1'); }}
-              style={
-                (this.state.activeTab === '1') ?
-                {backgroundColor: 'rgb(0,105,155, .1)' }
-                :
-                null
-              }
             >
               To Do
             </NavLink>
           </NavItem>
           <NavItem>
             <NavLink
-              className={classnames({ active: this.state.activeTab === '2' })}
+              className={classnames({ active: this.state.activeTab === '2' },
+                this.state.activeTab === '2' ?
+                  "text-primary"
+                  :
+                  "text-muted"
+              )}
               onClick={() => { this.toggle('2'); }}
-              style={
-                (this.state.activeTab === '2') ?
-                {backgroundColor: 'rgb(0,105,155, .1)' }
-                :
-                null
-              }
-              >
+            >
               Complete
             </NavLink>
           </NavItem>
