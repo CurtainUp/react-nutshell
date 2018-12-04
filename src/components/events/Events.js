@@ -138,7 +138,7 @@ export default class Events extends Component {
     return (
       <Container className="events">
         <h1 className="text-center mt-5">Egg-citing Events!</h1>
-        <div className="text-light text-center mt-5" ><Button className="text-light" color="primary" id="addEvent" onClick={(e) => {
+        <div className="text-light text-center mt-4" ><Button className="text-light" color="primary" id="addEvent" onClick={(e) => {
           this.getId("addEvent").then(() => this.toggle())
         }}>Add New Event</Button></div>
         <div className="text-center mt-5">
