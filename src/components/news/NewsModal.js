@@ -42,8 +42,8 @@ export default class NewsModal extends React.Component {
 
   render() {
     return (
-      <div className="text-center m-3">
-        <Button className="center text-white" color="success" onClick={this.toggle}>Add Article</Button>
+      <div className="text-center mt-4">
+        <Button className="center text-white" color="primary" onClick={this.toggle}>Add Article</Button>
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <form onSubmit={(e) => {
             e.preventDefault()

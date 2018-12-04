@@ -19,7 +19,7 @@ export default class NewsList extends React.Component {
         <ListGroup>
           {
             this.props.news.map((article) =>
-              <ListGroupItem key={article.id}>
+              <ListGroupItem className="mt-5" key={article.id}>
                 <Row>
                   <Col xs="1" className="d-flex align-items-center">
                     <Badge><i className="icon-book-open m-1"></i></Badge></Col>
