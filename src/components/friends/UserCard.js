@@ -45,6 +45,14 @@ export default class UserCard extends Component {
                 Following You
               </NavLink>
             </NavItem>
+            <NavItem>
+              <NavLink
+                className={classnames({ active: this.state.activeTab === '3' })}
+                onClick={() => { this.toggle('3'); }}
+              >
+                All Users
+              </NavLink>
+            </NavItem>
           </Nav>
           <TabContent activeTab={this.state.activeTab}>
             <TabPane tabId="1">
@@ -97,6 +105,51 @@ export default class UserCard extends Component {
                 </CardGroup>
               </Container>
             </TabPane>
+
+            <TabPane tabId="3">
+              <Container className="my-2">
+                <CardGroup>
+                  { this.props.allUsers.map(user => {
+
+                      let isYou = user.id === this.props.currentUserId
+                      // let relationshipId = this.props.relationships.find(relationship => relationship.userId === this.props.currentUserId && relationship.friendId === user.id).id
+                      let isFriend = this.props.relationships.find(relationship => relationship.friendId === user.id && relationship.userId === this.props.currentUserId)
+                      let isFollower = this.props.relationships.find(relationship => relationship.userId === user.id && relationship.friendId === this.props.currentUserId)
+                      return (
+                        <Col key={user.id} xs="3">
+                          <Card className="m-2">
+                            <CardImg top src={user.profilePic} alt="Card image cap" />
+                            <CardBody>
+                              <CardTitle>{user.displayName}</CardTitle>
+                              { isYou
+                                ? <p>This is you</p>
+                                : null
+                                }
+
+                              { isFollower
+                                ? <p className="mb-0">{`They follow you.`}</p>
+                                : (!isYou
+                                  ? <p>{`They don't follow you.`}</p>
+                                  : null)
+                                }
+
+                              { isFriend
+                                ? <p>You follow them. <Button className="mt-3" onClick={() => this.props.removeRelationship(isFriend.id)}>Unfollow</Button></p>
+                                : (!isYou
+                                  ? <p className="mb-0">You don't follow them.<Button className="mt-3" onClick={() => this.props.addRelationship(user.id)}>Follow</Button></p>
+                                  : null)
+                                }
+
+                            </CardBody>
+                          </Card>
+                        </Col>
+                      )
+                    })
+                  }
+                </CardGroup>
+              </Container>
+            </TabPane>
+
           </TabContent>
         </Container >
       </React.Fragment>

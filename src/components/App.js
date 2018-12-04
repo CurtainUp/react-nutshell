@@ -149,7 +149,8 @@ class App extends Component {
               findFriends={this.findFriends}
               findFollowers={this.findFollowers}
               addRelationship={this.addRelationship}
-              removeRelationship={this.removeRelationship} />
+              removeRelationship={this.removeRelationship}
+              allUsers={this.state.allUsers} />
           }
           return <Redirect to="/login" />
         }} />
