@@ -6,6 +6,7 @@ import EventForm from "./EventForm"
 import "./Events.css"
 import userSession from "../../modules/User/UserSession"
 
+let currentUser
 
 export default class Events extends Component {
   state = {
@@ -15,18 +16,24 @@ export default class Events extends Component {
     date: "",
     location: "",
     buttonId: "",
-    firstEventId: ""
+    firstEventId: "",
+    currentUser: ""
 
 
   }
 
-
   componentDidMount() {
     this.props.findFriends(userSession.getUser())
+    .then(()=> {
+      this.setCurrentUser()
+    })
     .then(()=>{
         this.getEvents()
-
     })
+  }
+
+  setCurrentUser = () => {
+    this.setState({currentUser: userSession.getUser()})
   }
 
 
@@ -159,7 +166,10 @@ export default class Events extends Component {
           editState={this.editState}
           getId={this.getId}
           firstEventId={this.state.firstEventId}
-          friendsArray={this.props.friendsArray} />
+          friendsArray={this.props.friendsArray}
+          currentUser={this.state.currentUser}
+          setCurrentUser={this.setCurrentUser}
+          />
         </div>
 
       </Container>

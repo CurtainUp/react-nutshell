@@ -19,7 +19,9 @@ export default class EventList extends Component {
           editState={this.props.editState}
           getId={this.props.getId}
           firstEventId={this.props.firstEventId}
-          friendsArray={this.props.friendsArray} />
+          friendsArray={this.props.friendsArray}
+          currentUser={this.props.currentUser}
+          setCurrentUser={this.props.setCurrentUser} />
         )
       }
     </ListGroup>
