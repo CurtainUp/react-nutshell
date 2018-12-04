@@ -38,7 +38,7 @@ export default class NewsList extends React.Component {
             )
           }
         </ListGroup>
-        <h1 className="text-center m-5">Your Friend's News!</h1>
+        <h1 className="text-center m-5">News from Your Waddle!</h1>
         <ListGroup className="mt-10">
           {
             this.props.friendNews.map((article) =>

@@ -63,13 +63,13 @@ export default class UserCard extends Component {
                       let relationshipId = this.props.relationships.find(relationship => relationship.userId === this.props.currentUserId && relationship.friendId === user.id).id
 
                       return (
-                        <Col key={user.id} xs="3">
-                          <Card className="m-2">
+                        <Col key={user.id} md="4" lg="3">
+                          <Card className="mt-2">
                             <CardImg top src={user.profilePic} alt="Card image cap" />
-                            <CardBody>
+                            <CardBody className="p-2">
                               <CardTitle>{user.displayName}</CardTitle>
                               {/* Unfollow your friends */}
-                              <Button onClick={() => this.props.removeRelationship(relationshipId)}>Unfollow</Button>
+                              <Button className="btn-sm mb-0 text-white" color="danger" onClick={() => this.props.removeRelationship(relationshipId)}>Unfollow</Button>
                             </CardBody>
                           </Card>
                         </Col>
@@ -85,16 +85,16 @@ export default class UserCard extends Component {
                   {
                     this.props.followersArray.map(user => {
                       return (
-                        <Col key={user.id} xs="3">
-                          <Card className="m-2">
+                        <Col key={user.id} md="4" lg="3">
+                          <Card className="mt-2">
                             <CardImg top src={user.profilePic} alt="Card image cap" />
-                            <CardBody>
+                            <CardBody className="p-2">
                               <CardTitle>{user.displayName}</CardTitle>
                               {/* If you don't follow this user, give option to follow */}
                               {
                                 this.props.friendsArray.find(friend => friend.id === user.id)
                                 ? <p>You follow them!</p>
-                                : <Button onClick={() => this.props.addRelationship(user.id)}>Follow</Button>
+                                : <Button className="btn-sm mb-0 text-white" color="success" onClick={() => this.props.addRelationship(user.id)}>Follow</Button>
                               }
                             </CardBody>
                           </Card>
@@ -116,10 +116,10 @@ export default class UserCard extends Component {
                       let isFriend = this.props.relationships.find(relationship => relationship.friendId === user.id && relationship.userId === this.props.currentUserId)
                       let isFollower = this.props.relationships.find(relationship => relationship.userId === user.id && relationship.friendId === this.props.currentUserId)
                       return (
-                        <Col key={user.id} xs="3">
-                          <Card className="m-2">
+                        <Col key={user.id} md="4" lg="3">
+                          <Card className="mt-2">
                             <CardImg top src={user.profilePic} alt="Card image cap" />
-                            <CardBody>
+                            <CardBody className="p-2">
                               <CardTitle>{user.displayName}</CardTitle>
                               { isYou
                                 ? <p>This is you</p>
@@ -134,9 +134,9 @@ export default class UserCard extends Component {
                                 }
 
                               { isFriend
-                                ? <p>You follow them. <Button className="mt-3" onClick={() => this.props.removeRelationship(isFriend.id)}>Unfollow</Button></p>
+                                ? <p className="mb-0">You follow them. <br/><Button className="mt-3 btn-sm text-white" color="danger" onClick={() => this.props.removeRelationship(isFriend.id)}>Unfollow</Button></p>
                                 : (!isYou
-                                  ? <p className="mb-0">You don't follow them.<Button className="mt-3" onClick={() => this.props.addRelationship(user.id)}>Follow</Button></p>
+                                  ? <p className="mb-0">You don't follow them.<br/><Button className="mt-3 btn-sm text-white" color="success" onClick={() => this.props.addRelationship(user.id)}>Follow</Button></p>
                                   : null)
                                 }
 

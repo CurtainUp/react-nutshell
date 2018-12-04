@@ -34,7 +34,7 @@ export default class NavBar extends React.Component {
     return (
       <div>
         <Navbar color="dark" dark expand="md">
-          <NavbarBrand tag={Link} to="/">Waddle</NavbarBrand>
+          <NavbarBrand tag={Link} to="/">🐧 Waddle 2</NavbarBrand>
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>

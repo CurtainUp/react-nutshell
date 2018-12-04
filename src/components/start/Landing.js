@@ -5,6 +5,8 @@ import RegisterModal from './RegisterModal'
 import { Redirect } from 'react-router-dom'
 import userSession from '../../modules/User/UserSession'
 
+import './landing.scss'
+
 export default class Landing extends Component {
   state = {
     loginSuccess: false
