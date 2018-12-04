@@ -14,6 +14,7 @@ export default class Friend extends Component {
     return (
       <React.Fragment>
         <UserCard
+          allUsers={this.props.allUsers}
           followersArray={this.props.followersArray}
           friendsArray={this.props.friendsArray}
           currentUserId={this.props.currentUserId}
