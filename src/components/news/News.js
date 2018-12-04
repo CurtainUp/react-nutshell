@@ -35,9 +35,9 @@ export default class News extends React.Component {
   // Posts new article to database and adds them to state.
   saveArticle = (articleInfo) => {
     API.saveData("news", articleInfo)
-      .then(() => {
-        return this.newsLog()
-      })
+      // .then(() => {
+      //   return this.newsLog()
+      // })
   }
 
   editArticle = (articleInfo, id) => {

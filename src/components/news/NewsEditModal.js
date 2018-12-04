@@ -1,6 +1,7 @@
 import React from 'react'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Label, Input } from 'reactstrap'
 import moment from 'moment'
+import UserSession from '../../modules/User/UserSession';
 
 export default class NewsEditModal extends React.Component {
   constructor(props) {
@@ -23,7 +24,7 @@ export default class NewsEditModal extends React.Component {
     // ADD TIMESTAMP
     let timeSaved = moment(new Date())
     // ADD USER ID ON CLICK - Currently hard coded, needs to be userSession.getUser()
-    let userId = 2
+    let userId = UserSession.getUser()
     let articleInfo = {
       title: this.state.title,
       summary: this.state.summary,
