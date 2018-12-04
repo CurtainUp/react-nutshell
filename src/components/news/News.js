@@ -25,19 +25,23 @@ export default class News extends React.Component {
   friendNewsLog = () => {
     // Expand collects friend's user info and gives immediate access
     let newsSearch = `news?_expand=user`
-    this.props.friendsArray.map((friend) => {
-      return newsSearch += `&userId=${friend.id}`
-    })
-    return API.getData(`${newsSearch}&_sort=timestamp&_order=desc`)
-    .then((news) => this.setState({ friendNews: news }))
+    if (this.props.friendsArray.length > 0) {
+
+      this.props.friendsArray.map((friend) => {
+        return newsSearch += `&userId=${friend.id}`
+      })
+      return API.getData(`${newsSearch}&_sort=timestamp&_order=desc`)
+        .then((news) => this.setState({ friendNews: news }))
+    }
+    console.log("No Friends")
   }
 
   // Posts new article to database and adds them to state.
   saveArticle = (articleInfo) => {
     API.saveData("news", articleInfo)
-      // .then(() => {
-      //   return this.newsLog()
-      // })
+      .then(() => {
+        return this.newsLog()
+      })
   }
 
   editArticle = (articleInfo, id) => {
@@ -50,23 +54,25 @@ export default class News extends React.Component {
   // OnClick functionality to delete saved articles
   handleDelete = (id) => {
     API.deleteData("news", id)
-      .then(() => API.getData("news"))
-      .then((news) =>
-        this.setState({ news: news }))
+      .then(() => {
+        return this.newsLog()
+      })
   }
 
   componentDidMount() {
-    // return this.props.findFriends(this.props.currentUserId)
-      this.newsLog()
+    return this.props.findFriends(UserSession.getUser())
+      .then(() => this.newsLog())
       .then(() => this.friendNewsLog())
+  }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.friendsArray !== prevProps.friendsArray) {
+      this.friendNewsLog()
+    }
 
   }
 
   render() {
-    // if (this.props.friendsArray.length > 0) {
-    //   this.friendNewsLog()
-    // }
 
     return (
       <Container>
