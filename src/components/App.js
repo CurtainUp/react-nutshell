@@ -138,7 +138,10 @@ class App extends Component {
         }} />
         <Route exact path="/news" render={(props) => {
           if (this.isAuthenticated()) {
-            return <News currentUser={userSession.getUser()} />
+            return <News
+            currentUser={userSession.getUser()}
+            friendsArray={this.state.friendsArray}
+            findFriends={this.findFriends} />
           }
           return <Redirect to="/login" />
         }} />
