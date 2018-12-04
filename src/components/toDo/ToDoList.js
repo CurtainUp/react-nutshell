@@ -68,7 +68,12 @@ export default class ToDoList extends Component {
         <Nav tabs>
           <NavItem>
             <NavLink
-              className={classnames({ active: this.state.activeTab === '1'})}
+              className={classnames({ active: this.state.activeTab === '1' },
+                this.state.activeTab === '1' ?
+                  "text-primary"
+                  :
+                  "text-muted"
+              )}
               onClick={() => { this.toggle('1'); }}
             >
               To Do
@@ -76,7 +81,12 @@ export default class ToDoList extends Component {
           </NavItem>
           <NavItem>
             <NavLink
-              className={classnames({ active: this.state.activeTab === '2' })}
+              className={classnames({ active: this.state.activeTab === '2' },
+                this.state.activeTab === '2' ?
+                  "text-primary"
+                  :
+                  "text-muted"
+              )}
               onClick={() => { this.toggle('2'); }}
             >
               Complete
@@ -87,10 +97,10 @@ export default class ToDoList extends Component {
 
           {/* FIRST TAB */}
 
-          <TabPane  tabId="1">
+          <TabPane tabId="1">
             <Container className="my-5">
               <Row>
-                <Col sm="12" md={{ size: 9, offset: 1}}>
+                <Col sm="12" md={{ size: 9, offset: 1 }}>
                   <ListGroup>
                     {
                       this.props.tasks.map((task) => {
@@ -106,7 +116,7 @@ export default class ToDoList extends Component {
                                     <React.Fragment>
                                       <Col xs="4" onKeyPress={(event) => { this.handleKeyPress(event, task.id) }}>
                                         <input id="name" onChange={(evt) => this.handleFieldChange(evt)} autoFocus type="text" defaultValue={task.name}></input>
-                                        <input id="dueBy" onChange={(evt) => this.handleFieldChange(evt)} type="date" defaultValue={moment(task.dueBy).format('l')}></input>
+                                        <input id="dueBy" onChange={(evt) => this.handleFieldChange(evt)} type="date" defaultValue={task.dueBy}></input>
                                       </Col>
 
                                       <Col xs="5">
@@ -154,6 +164,8 @@ export default class ToDoList extends Component {
                               </Row>
                             </ListGroupItem>
                           )
+                        } else {
+                          return null
                         }
                       })
                     }
@@ -170,7 +182,7 @@ export default class ToDoList extends Component {
           <TabPane tabId="2">
             <Container className="my-5">
               <Row>
-                <Col sm="12" md={{ size: 9, offset: 1}}>
+                <Col sm="12" md={{ size: 9, offset: 1 }}>
                   <ListGroup>
                     {
                       this.props.tasks.map((task) => {
@@ -203,7 +215,7 @@ export default class ToDoList extends Component {
                                   <React.Fragment>
                                     <Col xs="4">
                                       <ListGroupItemHeading>{task.name}</ListGroupItemHeading>
-                                      <ListGroupItemText>{task.dueBy}</ListGroupItemText>
+                                      <ListGroupItemText>{moment(task.dueBy).format('l')}</ListGroupItemText>
                                     </Col>
 
                                     <Col xs="3" className="d-flex auto align-items-center">
@@ -212,17 +224,10 @@ export default class ToDoList extends Component {
                                         <Input onClick={() => this.props.toggleStatus(task.status, task.id)} defaultChecked type="checkbox" />
                                       </InputGroup>
                                     </Col>
-                                    {
-                                        moment(this.state.today) >= moment(task.dueBy) ?
-                                          <Col xs="2" className="d-flex auto align-items-center">
-                                            <Alert color="warning" className="my-0">
-                                              Past Due!
-                                            </Alert>
-                                          </Col>
-                                          :
-                                          <Col xs="2">
-                                          </Col>
-                                      }
+
+                                    <Col xs="2">
+                                    </Col>
+
                                     <Col xs="auto" className="d-flex auto align-items-center">
                                       <Button className="m-1 px-2 py-1" color="primary" onClick={() => { this.editKey(task.id) }}>
                                         <i className="icon-pencil "></i></Button>
@@ -232,6 +237,8 @@ export default class ToDoList extends Component {
                               }
                             </Row>
                           </ListGroupItem>
+                        } else {
+                          return null
                         }
                       })
                     }
