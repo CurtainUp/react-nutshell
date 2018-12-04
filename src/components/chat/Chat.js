@@ -12,34 +12,15 @@ class Chat extends Component {
     isLoaded: false
   }
 
-  componentWillUnmount() {
-    this.props.clearState()
-  }
-
   componentDidMount() {
 
-    //From App, pass down this.findFriends, this.findFollowers
-    //call both to refresh the data
-
-    return this.getUsers()
-    .then(() => this.getRelationships())
-    .then(() => this.getMessages())
+    return this.getMessages()
     .then(() => this.setState({isLoaded: true}))
   }
 
   getMessages = () => {
     return API.getData("messages")
     .then(messages => this.setState({messages: messages}))
-  }
-
-  getUsers = () => {
-    return API.getData("users")
-      .then(users => this.setState({users: users}))
-  }
-
-  getRelationships = () => {
-    return API.getData("relationships")
-      .then(relationships => this.setState({relationships: relationships}))
   }
 
   sendMessage = (msgObj) => {
@@ -52,19 +33,6 @@ class Chat extends Component {
     .then(() => this.getMessages())
   }
 
-  addRelationship = (newFriend) => {
-    let object = {
-      userId: this.props.currentUser,
-      friendId: newFriend
-    }
-    return API.saveData("relationships", object)
-      .then(() => this.getRelationships())
-  }
-  removeRelationship = (id) => {
-    return API.deleteData("relationships", id)
-      .then(() => this.getRelationships())
-  }
-
   render() {
 
     return (
@@ -75,25 +43,24 @@ class Chat extends Component {
           </Col>
         </Row>
         {/* Make sure data is loaded */}
-        { this.state.isLoaded && this.state.messages.length > 0 && this.state.users.length > 0
+        { this.state.isLoaded && this.state.messages.length > 0 && this.props.users.length > 0
         ? (
-          <>
           <Row>
             <Col>
               <ChatMessages
                 messages={this.state.messages}
                 currentUser={this.props.currentUser}
-                users={this.state.users}
-                relationships={this.state.relationships}
-                removeRelationship = {this.removeRelationship}
-                addRelationship = {this.addRelationship}
+                users={this.props.users}
+                relationships={this.props.relationships}
+                removeRelationship = {this.props.removeRelationship}
+                addRelationship = {this.props.addRelationship}
                 editMessage={this.editMessage} />
             </Col>
           </Row>
-          <ChatInput sendMessage={this.sendMessage} currentUser={this.props.currentUser} />
-          </>
         ) : null
         }
+          <ChatInput sendMessage={this.sendMessage} currentUser={this.props.currentUser} />
+
       </Container>
     )
   }

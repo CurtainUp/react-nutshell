@@ -22,26 +22,14 @@ class App extends Component {
     this.findFriends(userSession.getUser())
   }
 
-  clearState = () => {
-    this.setState({
-      followersArray: [],
-      friendsArray: [],
-      relationships: []
-    })
-  }
-
   getUsers = () => {
-    let newState = {}
     return api.getData("users")
-      .then(users => newState.allUsers = users)
-      .then(() => this.setState(newState))
+      .then((users) => this.setState({allUsers: users}))
   }
 
   getRelationships = () => {
-    let newState = {}
     return api.getData("relationships")
-      .then(relationships => newState.relationships = relationships)
-      .then(() => this.setState(newState))
+      .then(relationships => this.setState({relationships: relationships}))
   }
 
   findRelationships = (currentUserId) => {
@@ -50,6 +38,26 @@ class App extends Component {
         return this.state.relationships.filter((relationship) => relationship.userId === currentUserId)
       })
   }
+
+  findFriends = (currentUserId) => {
+    return this.findRelationships(currentUserId)
+      .then((rels) => {
+        let friendsArray = []
+        rels.forEach((rel) => {
+          friendsArray.push(this.state.allUsers.find(user => user.id === rel.friendId))
+        })
+        this.setState({ friendsArray: friendsArray })
+      })
+  }
+
+  findFollowers = (currentUserId) => {
+    return api.getData(`relationships?friendId=${currentUserId}`)
+      .then((followers) => followers.map((follower) => {
+        return this.state.allUsers.find(user => user.id === follower.userId)
+      })
+      ).then((followers) => this.setState({followersArray: followers}))
+  }
+
   removeRelationship = (id) => {
     return api.deleteData("relationships", id)
       .then(() => new Promise((resolve) => {
@@ -72,25 +80,6 @@ class App extends Component {
     return api.saveData("relationships", object)
       .then(() => this.findFriends(currentUserId))
       .then(() => this.findFollowers(currentUserId))
-  }
-
-  findFriends = (currentUserId) => {
-    return this.findRelationships(currentUserId)
-      .then((rels) => {
-        let friendsArray = []
-        rels.forEach((rel) => {
-          friendsArray.push(this.state.allUsers.find(user => user.id === rel.friendId))
-        })
-        this.setState({ friendsArray: friendsArray })
-      })
-  }
-
-  findFollowers = (currentUserId) => {
-    return api.getData(`relationships?friendId=${currentUserId}`)
-      .then((followers) => followers.map((follower) => {
-        return this.state.allUsers.find(user => user.id === follower.userId)
-      })
-      ).then((followers) => this.setState({followersArray: followers}))
   }
 
   isAuthenticated = () => sessionStorage.getItem("id") !== null
@@ -122,7 +111,13 @@ class App extends Component {
 
         <Route exact path="/chat" render={(props) => {
           if (this.isAuthenticated()) {
-            return <Chat currentUser={userSession.getUser()} clearState={this.clearState} />
+            return <Chat
+              currentUser={userSession.getUser()}
+              getRelationships={this.getRelationships}
+              addRelationship={this.addRelationship}
+              removeRelationship={this.removeRelationship}
+              users={this.state.allUsers}
+              relationships={this.state.relationships} />
           }
           return <Redirect to="/login" />
         }} />
