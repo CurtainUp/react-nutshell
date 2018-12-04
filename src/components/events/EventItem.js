@@ -1,7 +1,7 @@
 import React from 'react';
 import { Row, Button, Col, ListGroupItem, ListGroupItemHeading, ListGroupItemText } from 'reactstrap';
 import userSession from "../../modules/User/UserSession"
-
+import moment from 'moment'
 
 
 
@@ -23,7 +23,7 @@ export default class EventItem extends React.Component {
 
             <Col xs={7} >
               <ListGroupItemText >
-                {this.props.event.date}
+                {moment(this.props.event.date).format('l')}
                 {(this.props.event.userId !== this.props.currentUser)
                   ?
                     <span className="badge badge-primary ml-2">
