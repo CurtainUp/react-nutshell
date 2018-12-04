@@ -24,7 +24,7 @@ export default class Landing extends Component {
     return (
       <React.Fragment>
         <Jumbotron>
-          <h1 className="display-3">Welcome to Waddle 2.0</h1>
+          <h1 className="display-3">Welcome to Waddle 2</h1>
           <hr className="my-2" />
           <Row>
             <LoginModal buttonLabel="Login" checkSuccess={this.checkSuccess} />
