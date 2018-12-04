@@ -90,7 +90,7 @@ export default class ToDo extends Component {
       <Container>
         <Row>
           <Col className="text-center">
-            <h1 className="text-center m-4">{this.state.displayName}'s To Do List</h1>
+            <h1 className="text-center mt-5">{this.state.displayName}'s To Do List</h1>
             <TaskForm currentUser={this.props.currentUser} createTask={this.createTask} />
             <ToDoList
               deleteTask={this.deleteTask}

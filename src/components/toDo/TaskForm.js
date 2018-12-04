@@ -42,7 +42,7 @@ export default class TaskForm extends Component {
   render() {
     return (
       <div>
-        <Button color="primary" className="m-4" onClick={this.toggle}>Add Task</Button>
+        <Button color="primary" className="mt-3" onClick={this.toggle}>Add Task</Button>
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <form onSubmit={(e) => {
             e.preventDefault()
