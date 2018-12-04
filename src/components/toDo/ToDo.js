@@ -3,6 +3,7 @@ import { Container, Row, Col } from 'reactstrap';
 import api from './../../modules/API/API'
 import ToDoList from './ToDoList'
 import TaskForm from './TaskForm'
+import UserSession from './../../modules/User/UserSession'
 
 export default class ToDo extends Component {
 
@@ -17,11 +18,23 @@ export default class ToDo extends Component {
 
   componentDidMount() {
     this.getTasks()
+    this.getDisplayName()
+  }
+
+  getDisplayName = () => {
+    let userId = UserSession.getUser()
+    api.getData(`users?id=${userId}`)
+      .then((user) => {
+        return this.setState({
+          displayName: user[0].displayName,
+          profilePic: user[0].profilePic
+        })
+      })
   }
 
   getTasks = () => {
     let newState = {}
-    api.getData("tasks?_sort=dueBy&_order=asc")
+    api.getData(`tasks?userId=${this.props.currentUser}&_sort=dueBy&_order=asc`)
       .then(tasks => newState.tasks = tasks)
       .then(() => this.setState(newState))
   }
@@ -29,7 +42,7 @@ export default class ToDo extends Component {
   createTask = (taskObj) => {
     let newState = {}
     api.saveData("tasks", taskObj)
-      .then(() => api.getData("tasks?_sort=dueBy&_order=asc"))
+      .then(() => api.getData(`tasks?userId=${this.props.currentUser}&_sort=dueBy&_order=asc`))
       .then(tasks => newState.tasks = tasks)
       .then(() => this.setState(newState))
   }
@@ -38,7 +51,7 @@ export default class ToDo extends Component {
   deleteTask = (id) => {
     let newState = {}
     api.deleteData("tasks", id)
-      .then(() => api.getData("tasks?_sort=dueBy&_order=asc"))
+      .then(() => api.getData(`tasks?userId=${this.props.currentUser}&_sort=dueBy&_order=asc`))
       .then(tasks => newState.tasks = tasks)
       .then(() => this.setState(newState))
   }
@@ -46,7 +59,7 @@ export default class ToDo extends Component {
   editTask = (id, taskObj) => {
     let newState = {}
     return api.editData("tasks", taskObj, id)
-      .then(() => api.getData("tasks?_sort=dueBy&_order=asc"))
+      .then(() => api.getData(`tasks?userId=${this.props.currentUser}&_sort=dueBy&_order=asc`))
       .then(tasks => newState.tasks = tasks)
       .then(() => this.setState(newState))
   }
@@ -65,7 +78,7 @@ export default class ToDo extends Component {
       }
     }
     api.editData("tasks", completeObj, id)
-      .then(() => api.getData("tasks?_sort=dueBy&_order=asc"))
+      .then(() => api.getData(`tasks?userId=${this.props.currentUser}&_sort=dueBy&_order=asc`))
       .then(tasks => newState.tasks = tasks)
       .then(() => this.setState(newState))
   }
@@ -77,8 +90,8 @@ export default class ToDo extends Component {
       <Container>
         <Row>
           <Col className="text-center">
-            <h1 className="text-center m-4">My To Do List</h1>
-            <TaskForm createTask={this.createTask} />
+            <h1 className="text-center mt-5">{this.state.displayName}'s To Do List</h1>
+            <TaskForm currentUser={this.props.currentUser} createTask={this.createTask} />
             <ToDoList
               deleteTask={this.deleteTask}
               tasks={this.state.tasks}
