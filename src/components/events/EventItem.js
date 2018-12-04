@@ -2,7 +2,7 @@ import React from 'react';
 import { Row, Button, Col, ListGroupItem, ListGroupItemHeading, ListGroupItemText } from 'reactstrap';
 import userSession from "../../modules/User/UserSession"
 
-const currentUser = userSession.getUser()
+
 
 
 
@@ -24,7 +24,7 @@ export default class EventItem extends React.Component {
             <Col xs={7} >
               <ListGroupItemText >
                 {this.props.event.date}
-                {(this.props.event.userId !== currentUser)
+                {(this.props.event.userId !== this.props.currentUser)
                   ?
                     <span className="badge badge-primary ml-2">
                     {this.props.event.user.displayName}
@@ -34,17 +34,17 @@ export default class EventItem extends React.Component {
                 }
 
               </ListGroupItemText>
-              {(this.props.event.userId !== currentUser)
+              {(this.props.event.userId !== this.props.currentUser)
                 ? <ListGroupItemHeading><em>{this.props.event.name}</em></ListGroupItemHeading>
                 : <ListGroupItemHeading >{this.props.event.name} </ListGroupItemHeading>
               }
-              {(this.props.event.userId !== currentUser)
+              {(this.props.event.userId !== this.props.currentUser)
                 ? <ListGroupItemText><em>{this.props.event.location}</em></ListGroupItemText>
                 : <ListGroupItemText > {this.props.event.location} </ListGroupItemText>
               }
 
             </Col>
-            { (this.props.event.userId === currentUser)
+            { (this.props.event.userId === this.props.currentUser)
             ?<Col xs={3} className="d-flex align-items-center">
                <Button color={(this.props.firstEventId === this.props.event.id) ? "fresca" : "primary"} className="mx-1" onClick={(e) => {
                 this.props.getId(this.props.event.id)
